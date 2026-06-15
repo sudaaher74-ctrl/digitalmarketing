@@ -1,0 +1,107 @@
+import { Inter, Outfit } from "next/font/google";
+import "./globals.css";
+
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-inter",
+  display: "swap",
+});
+
+const outfit = Outfit({
+  subsets: ["latin"],
+  variable: "--font-outfit",
+  display: "swap",
+});
+
+export const metadata = {
+  title: "Your Agency Name | Digital Marketing & Web Development Agency",
+  description:
+    "We help businesses grow through powerful digital marketing strategies, high-converting websites, SEO optimization, Google Ads, and branding solutions. Get a free consultation today.",
+  keywords: [
+    "digital marketing agency",
+    "web development",
+    "SEO optimization",
+    "Google Ads management",
+    "social media marketing",
+    "branding",
+    "website design",
+  ],
+  authors: [{ name: "Your Agency Name" }],
+  creator: "Your Agency Name",
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    url: "https://youragencyname.com",
+    siteName: "Your Agency Name",
+    title: "Your Agency Name | Digital Marketing & Web Development Agency",
+    description:
+      "We create powerful digital experiences that generate leads, increase sales, and build strong brands.",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Your Agency Name - Digital Marketing Agency",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Your Agency Name | Digital Marketing Agency",
+    description:
+      "We create powerful digital experiences that generate leads, increase sales, and build strong brands.",
+    images: ["/og-image.png"],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
+};
+
+export default function RootLayout({ children }) {
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    name: "Your Agency Name",
+    url: "https://youragencyname.com",
+    description:
+      "Digital marketing and web development agency helping businesses grow through powerful digital experiences.",
+    contactPoint: {
+      "@type": "ContactPoint",
+      telephone: "+91-98765-43210",
+      contactType: "customer service",
+      availableLanguage: ["English", "Hindi"],
+    },
+    sameAs: [
+      "https://instagram.com/youragencyname",
+      "https://facebook.com/youragencyname",
+      "https://linkedin.com/company/youragencyname",
+    ],
+  };
+
+  return (
+    <html lang="en" className={`${inter.variable} ${outfit.variable}`}>
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+      </head>
+      <body
+        className="min-h-screen antialiased"
+        style={{
+          fontFamily: "'Inter', sans-serif",
+        }}
+      >
+        {children}
+      </body>
+    </html>
+  );
+}
