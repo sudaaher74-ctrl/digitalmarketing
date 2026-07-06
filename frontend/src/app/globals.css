@@ -74,7 +74,8 @@ h1, h2, h3, h4, .display {
 .container {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 32px;
+  padding-left: 32px;
+  padding-right: 32px;
 }
 
 .section { padding: 100px 0; position: relative; }
@@ -184,5 +185,5 @@ select.form-input option { background: var(--panel); color: var(--text); }
 
 @media (max-width: 768px) {
   .section { padding: 70px 0; }
-  .container { padding: 0 20px; }
+  .container { padding-left: 20px; padding-right: 20px; }
 }

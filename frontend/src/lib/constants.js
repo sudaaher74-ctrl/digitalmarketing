@@ -36,6 +36,7 @@ export const CLIENTS = [
     services: ["Website Development", "SEO Optimization", "Product Showcase"],
     description: "A premium frozen food export company requiring a corporate web presence to establish trust with international clients.",
     color: "#00E5FF",
+    link: "https://aivaenterprises.com"
   },
   {
     name: "Milquu Fresh",
@@ -43,6 +44,7 @@ export const CLIENTS = [
     services: ["Website Development", "Branding", "Mobile Optimization"],
     description: "A dairy brand looking to build a strong digital presence with modern branding and mobile-first approach.",
     color: "#6C63FF",
+    link: "https://milquufresh.in"
   },
   {
     name: "OS Interior",
@@ -50,6 +52,23 @@ export const CLIENTS = [
     services: ["Portfolio Website", "Lead Generation", "Responsive Design"],
     description: "An interior design studio needing a stunning portfolio to showcase projects and generate leads online.",
     color: "#00FFB2",
+    link: "https://osinterior.in"
+  },
+  {
+    name: "Brand Kettle",
+    industry: "E-Commerce",
+    services: ["E-Commerce Website", "SEO Optimization", "Branding"],
+    description: "A comprehensive digital presence and e-commerce platform for a growing brand.",
+    color: "#FF3366",
+    link: "https://brandkettle.in"
+  },
+  {
+    name: "Drona Archery",
+    industry: "Sports Equipment",
+    services: ["Online Store", "Performance Marketing", "Social Media"],
+    description: "An online store for premium archery equipment, designed for better conversions.",
+    color: "#FF9900",
+    link: "https://dronaarchery.in"
   },
 ];
 
@@ -129,6 +148,7 @@ export const CASE_STUDIES = [
     services: ["Website Design", "Branding", "Mobile UX"],
     metrics: { engagement: "+180%", presence: "Established", satisfaction: "100%" },
     color: "#6C63FF",
+    link: "https://milquufresh.in"
   },
   {
     title: "AIVA Enterprises",
@@ -139,6 +159,7 @@ export const CASE_STUDIES = [
     services: ["Corporate Website", "Product Showcase", "SEO"],
     metrics: { credibility: "+200%", inquiries: "+75%", trust: "Enhanced" },
     color: "#00E5FF",
+    link: "https://aivaenterprises.com"
   },
   {
     title: "OS Interior",
@@ -149,7 +170,30 @@ export const CASE_STUDIES = [
     services: ["Portfolio Website", "Lead Gen", "Responsive Design"],
     metrics: { leads: "+120%", trust: "Enhanced", bookings: "+90%" },
     color: "#00FFB2",
+    link: "https://osinterior.in"
   },
+  {
+    title: "Brand Kettle",
+    slug: "brand-kettle",
+    challenge: "Develop a high-converting e-commerce platform with a strong brand identity.",
+    solution: "Designed a modern, fast, and SEO-optimized online store with seamless checkout.",
+    result: "Increased online sales, better brand positioning, and higher search rankings.",
+    services: ["E-Commerce", "Branding", "SEO"],
+    metrics: { sales: "+150%", traffic: "+200%", bounceRate: "-40%" },
+    color: "#FF3366",
+    link: "https://brandkettle.in"
+  },
+  {
+    title: "Drona Archery",
+    slug: "drona-archery",
+    challenge: "Create a digital storefront to sell specialized sports equipment to a niche audience.",
+    solution: "Built a customized e-commerce experience with detailed product catalogs and easy navigation.",
+    result: "Expanded market reach, higher conversion rates, and improved customer satisfaction.",
+    services: ["Online Store", "UX/UI Design", "Marketing"],
+    metrics: { conversions: "+85%", reach: "+300%", sales: "+120%" },
+    color: "#FF9900",
+    link: "https://dronaarchery.in"
+  }
 ];
 
 export const PROCESS_STEPS = [

@@ -17,6 +17,14 @@ const META = {
     category: "Interior Design",
     metrics: [{ v: "+120%", l: "Leads" }, { v: "+90%", l: "Bookings" }],
   },
+  "brand-kettle": {
+    category: "E-Commerce",
+    metrics: [{ v: "+150%", l: "Sales" }, { v: "-40%", l: "Bounce" }],
+  },
+  "drona-archery": {
+    category: "Sports",
+    metrics: [{ v: "+85%", l: "Conv." }, { v: "+300%", l: "Reach" }],
+  },
 };
 
 export default function CaseStudies() {
@@ -33,14 +41,17 @@ export default function CaseStudies() {
           {CASE_STUDIES.map((study, i) => {
             const meta = META[study.slug];
             return (
-              <motion.div
+              <motion.a
+                href={study.link}
+                target="_blank"
+                rel="noopener noreferrer"
                 key={study.slug}
                 initial={{ opacity: 0, y: 24 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.2 }}
                 transition={{ duration: 0.5, delay: i * 0.1 }}
-                className="grid lg:grid-cols-[0.9fr_1.1fr_0.8fr] gap-6 lg:gap-10 items-center px-6 lg:px-10 py-11 transition-colors duration-300 hover:bg-[var(--card)]"
-                style={{ borderBottom: i < CASE_STUDIES.length - 1 ? "1px solid var(--hair)" : "none" }}
+                className="grid lg:grid-cols-[0.9fr_1.1fr_0.8fr] gap-6 lg:gap-10 items-center px-6 lg:px-10 py-11 transition-colors duration-300 hover:bg-[var(--card)] cursor-pointer"
+                style={{ borderBottom: i < CASE_STUDIES.length - 1 ? "1px solid var(--hair)" : "none", display: "grid" }}
               >
                 <div>
                   <div className="uppercase" style={{ fontFamily: "var(--font-heading)", letterSpacing: "1.5px", fontSize: 11, color: "var(--violet)", fontWeight: 600 }}>
@@ -68,7 +79,7 @@ export default function CaseStudies() {
                     </div>
                   ))}
                 </div>
-              </motion.div>
+              </motion.a>
             );
           })}
         </div>
