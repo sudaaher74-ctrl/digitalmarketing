@@ -14,7 +14,7 @@ const progs = [
 export default function Hero() {
   return (
     <section id="hero" className="relative overflow-hidden">
-      <div className="container pt-[150px] pb-[90px]">
+      <div className="container pt-[110px] pb-[70px]">
         <div className="grid lg:grid-cols-[1.05fr_0.95fr] gap-14 lg:gap-16 items-center">
           {/* Left */}
           <motion.div
@@ -23,19 +23,19 @@ export default function Hero() {
             transition={{ duration: 0.6 }}
           >
             <span
-              className="inline-flex items-center gap-2 border border-[var(--hair)] rounded-full px-4 py-2 mb-7 uppercase text-[var(--muted)]"
+              className="inline-flex items-center gap-2 border border-[var(--hair)] rounded-full px-4 py-2 mb-5 uppercase text-[var(--muted)]"
               style={{ fontFamily: "var(--font-heading)", fontSize: 12, letterSpacing: "1.5px", fontWeight: 600 }}
             >
               <span className="w-2 h-2 rounded-full" style={{ background: "var(--lime)" }} />
               Digital Marketing Agency
             </span>
 
-            <h1 className="text-white mb-6" style={{ fontFamily: "var(--font-heading)", fontSize: "clamp(44px, 6.4vw, 84px)" }}>
+            <h1 className="text-white mb-5" style={{ fontFamily: "var(--font-heading)", fontSize: "clamp(44px, 6.4vw, 84px)" }}>
               Growth for brands that refuse to{" "}
               <span style={{ color: "var(--lime)" }}>blend in.</span>
             </h1>
 
-            <p className="text-[var(--muted)] text-lg max-w-[480px] mb-9">
+            <p className="text-[var(--muted)] text-lg max-w-[480px] mb-7">
               We build high-converting websites and run marketing that generates leads,
               drives sales, and makes your brand impossible to ignore.
             </p>
