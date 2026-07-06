@@ -16,34 +16,14 @@ export default function Contact() {
     setError("");
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    setLoading(true);
-    setError("");
-    try {
-      const res = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000/api"}/leads`,
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(formData),
-        }
-      );
-      const data = await res.json();
-      if (!res.ok) throw new Error(data.message || "Failed to submit");
-      setSubmitted(true);
-      setFormData({ name: "", email: "", message: "" });
-    } catch (err) {
-      // Backend not running → show success anyway for demo
-      if (err.message.includes("fetch") || err.message.includes("Failed to fetch")) {
-        setSubmitted(true);
-        setFormData({ name: "", email: "", message: "" });
-      } else {
-        setError(err.message);
-      }
-    } finally {
-      setLoading(false);
-    }
+    const text = `Hi, I am ${formData.name}.\nEmail: ${formData.email}\nMessage: ${formData.message}`;
+    const url = `https://wa.me/${SITE_CONFIG.whatsapp}?text=${encodeURIComponent(text)}`;
+    window.open(url, "_blank");
+    
+    setSubmitted(true);
+    setFormData({ name: "", email: "", message: "" });
   };
 
   const info = [
