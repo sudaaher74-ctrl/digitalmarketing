@@ -36,7 +36,7 @@ export default function Hero() {
             </h1>
 
             <p className="text-[var(--muted)] text-lg max-w-[480px] mb-7">
-              We build high-converting websites and run marketing that generates leads,
+              We build high converting websites and run marketing that generates leads,
               drives sales, and makes your brand impossible to ignore.
             </p>
 
