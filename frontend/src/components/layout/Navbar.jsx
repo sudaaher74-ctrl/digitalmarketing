@@ -3,11 +3,11 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { HiOutlineBars3, HiXMark } from "react-icons/hi2";
-import { SITE_CONFIG } from "@/lib/constants";
+import { SITE_CONFIG, CASE_STUDIES } from "@/lib/constants";
 
 const NAV_LINKS = [
   { label: "Services", href: "#services" },
-  { label: "Case Studies", href: "#case-studies" },
+  { label: "Projects", isDropdown: true },
   { label: "Process", href: "#process" },
   { label: "FAQ", href: "#faq" },
 ];
@@ -64,13 +64,30 @@ export default function Navbar() {
 
           <div className="hidden min-[900px]:flex items-center gap-9">
             {NAV_LINKS.map((link) => (
-              <a
-                key={link.href}
-                href={link.href}
-                className="text-sm font-medium text-[var(--muted)] hover:text-white transition-colors"
-              >
-                {link.label}
-              </a>
+              link.isDropdown ? (
+                <div key={link.label} className="relative group">
+                  <button className="text-sm font-medium text-[var(--muted)] group-hover:text-white transition-colors py-6 flex items-center gap-1.5 cursor-pointer">
+                    {link.label} <span className="text-[9px] opacity-60">▼</span>
+                  </button>
+                  {/* Dropdown Menu */}
+                  <div className="absolute top-[60px] left-[-20px] min-w-[220px] bg-[var(--panel)] border border-[var(--hair)] rounded-xl overflow-hidden opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 flex flex-col translate-y-2 group-hover:translate-y-0 shadow-2xl">
+                    {CASE_STUDIES.map(study => (
+                      <a key={study.slug} href={study.link} target="_blank" rel="noopener noreferrer" className="px-5 py-3.5 hover:bg-[#202025] text-[var(--muted)] hover:text-[var(--lime)] border-b border-[var(--hair)] last:border-0 transition-colors text-[13px] font-medium flex items-center justify-between">
+                        {study.title}
+                        <span className="opacity-0 group-hover:opacity-100 transition-opacity">↗</span>
+                      </a>
+                    ))}
+                  </div>
+                </div>
+              ) : (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  className="text-sm font-medium text-[var(--muted)] hover:text-white transition-colors py-4"
+                >
+                  {link.label}
+                </a>
+              )
             ))}
             <a href="#contact" className="btn-lime !py-2.5 !px-5 !text-sm">
               Get Free Consultation →
@@ -102,7 +119,7 @@ export default function Navbar() {
               animate={{ x: 0 }}
               exit={{ x: "100%" }}
               transition={{ duration: 0.35, ease: [0.4, 0, 0.2, 1] }}
-              className="fixed top-0 right-0 bottom-0 z-[60] w-[78%] max-w-[340px] min-[900px]:hidden px-8 pt-24 pb-8 flex flex-col gap-1.5"
+              className="fixed top-0 right-0 bottom-0 z-[60] w-[78%] max-w-[340px] min-[900px]:hidden px-8 pt-24 pb-8 flex flex-col gap-1.5 overflow-y-auto"
               style={{ background: "var(--panel)", borderLeft: "1px solid var(--hair)" }}
             >
               <button
@@ -113,15 +130,28 @@ export default function Navbar() {
                 <HiXMark size={28} />
               </button>
               {NAV_LINKS.map((link) => (
-                <a
-                  key={link.href}
-                  href={link.href}
-                  onClick={() => setMobileOpen(false)}
-                  className="py-3.5 text-xl font-medium text-white border-b border-[var(--hair)]"
-                  style={{ fontFamily: "var(--font-heading)" }}
-                >
-                  {link.label}
-                </a>
+                link.isDropdown ? (
+                  <div key={link.label} className="border-b border-[var(--hair)] flex flex-col py-3">
+                    <span className="text-xl font-medium text-white mb-3" style={{ fontFamily: "var(--font-heading)" }}>{link.label}</span>
+                    <div className="flex flex-col pl-4 gap-3">
+                      {CASE_STUDIES.map(study => (
+                        <a key={study.slug} href={study.link} target="_blank" rel="noopener noreferrer" className="text-[var(--muted)] hover:text-[var(--lime)] text-[15px] flex items-center justify-between pr-4">
+                          {study.title} <span>↗</span>
+                        </a>
+                      ))}
+                    </div>
+                  </div>
+                ) : (
+                  <a
+                    key={link.href}
+                    href={link.href}
+                    onClick={() => setMobileOpen(false)}
+                    className="py-3.5 text-xl font-medium text-white border-b border-[var(--hair)]"
+                    style={{ fontFamily: "var(--font-heading)" }}
+                  >
+                    {link.label}
+                  </a>
+                )
               ))}
               <a
                 href="#contact"
