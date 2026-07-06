@@ -50,15 +50,16 @@ export default function CaseStudies() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.2 }}
                 transition={{ duration: 0.5, delay: i * 0.1 }}
-                className="grid lg:grid-cols-[0.9fr_1.1fr_0.8fr] gap-6 lg:gap-10 items-center px-6 lg:px-10 py-11 transition-colors duration-300 hover:bg-[var(--card)] cursor-pointer"
+                className="group grid lg:grid-cols-[0.9fr_1.1fr_0.8fr] gap-6 lg:gap-10 items-center px-6 lg:px-10 py-11 transition-colors duration-300 hover:bg-[var(--card)] cursor-pointer"
                 style={{ borderBottom: i < CASE_STUDIES.length - 1 ? "1px solid var(--hair)" : "none", display: "grid" }}
               >
                 <div>
                   <div className="uppercase" style={{ fontFamily: "var(--font-heading)", letterSpacing: "1.5px", fontSize: 11, color: "var(--violet)", fontWeight: 600 }}>
                     {meta.category}
                   </div>
-                  <h3 className="text-white my-3.5" style={{ fontFamily: "var(--font-heading)", fontSize: 34 }}>
+                  <h3 className="text-white my-3.5 flex items-center gap-3" style={{ fontFamily: "var(--font-heading)", fontSize: 34 }}>
                     {study.title}
+                    <span className="text-[var(--lime)] text-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300">↗</span>
                   </h3>
                   <div className="flex flex-wrap gap-2">
                     {study.services.map((s) => (
