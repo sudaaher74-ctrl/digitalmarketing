@@ -60,7 +60,7 @@ export const CLIENTS = [
     services: ["E-Commerce Website", "SEO Optimization", "Branding"],
     description: "A comprehensive digital presence and e-commerce platform for a growing brand.",
     color: "#FF3366",
-    link: "https://brandkettle.in"
+    link: "https://brandkettle.co.in"
   },
   {
     name: "Drona Archery",
@@ -181,7 +181,7 @@ export const CASE_STUDIES = [
     services: ["E-Commerce", "Branding", "SEO"],
     metrics: { sales: "+150%", traffic: "+200%", bounceRate: "-40%" },
     color: "#FF3366",
-    link: "https://brandkettle.in"
+    link: "https://brandkettle.co.in"
   },
   {
     title: "Drona Archery",
