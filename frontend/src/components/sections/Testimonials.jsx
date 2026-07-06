@@ -1,130 +1,51 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { HiChevronLeft, HiChevronRight } from "react-icons/hi2";
-import StarRating from "@/components/ui/StarRating";
+import { motion } from "framer-motion";
 import SectionHeading from "@/components/ui/SectionHeading";
 import { TESTIMONIALS } from "@/lib/constants";
 
+const AVATAR_BG = ["var(--lime)", "var(--violet)", "var(--lime)"];
+
 export default function Testimonials() {
-  const [current, setCurrent] = useState(0);
-  const [isPaused, setIsPaused] = useState(false);
-
-  const next = useCallback(() => {
-    setCurrent((prev) => (prev + 1) % TESTIMONIALS.length);
-  }, []);
-
-  const prev = useCallback(() => {
-    setCurrent((prev) => (prev - 1 + TESTIMONIALS.length) % TESTIMONIALS.length);
-  }, []);
-
-  // Auto-play
-  useEffect(() => {
-    if (isPaused) return;
-    const timer = setInterval(next, 5000);
-    return () => clearInterval(timer);
-  }, [isPaused, next]);
-
-  const testimonial = TESTIMONIALS[current];
-
   return (
     <section id="testimonials" className="section">
-      <div className="container mx-auto max-w-[1280px] px-6">
+      <div className="container">
         <SectionHeading
+          number="05"
           subtitle="Testimonials"
-          title="What Our Clients Say"
+          title="Don't take our word for it"
         />
 
-        <div
-          className="max-w-3xl mx-auto"
-          onMouseEnter={() => setIsPaused(true)}
-          onMouseLeave={() => setIsPaused(false)}
-        >
-          <div className="glass-card p-8 sm:p-10 rounded-2xl relative overflow-hidden">
-            {/* Decorative quote mark */}
-            <div className="absolute top-4 right-6 text-7xl font-serif gradient-text opacity-10 select-none">
-              &ldquo;
-            </div>
-
-            <AnimatePresence mode="wait">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {TESTIMONIALS.map((t, i) => {
+            const initials = t.name.split(" ").map((n) => n[0]).join("").slice(0, 2);
+            return (
               <motion.div
-                key={current}
-                initial={{ opacity: 0, x: 30 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: -30 }}
-                transition={{ duration: 0.4, ease: "easeInOut" }}
+                key={t.name}
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.2 }}
+                transition={{ duration: 0.5, delay: i * 0.08 }}
+                className="flex flex-col p-8"
+                style={{ background: "var(--card)", border: "1px solid var(--hair)" }}
               >
-                {/* Rating */}
-                <div className="mb-5">
-                  <StarRating rating={testimonial.rating} size={20} />
-                </div>
-
-                {/* Quote */}
-                <blockquote className="text-base sm:text-lg text-[var(--color-text-secondary)] leading-relaxed mb-8 italic">
-                  &ldquo;{testimonial.quote}&rdquo;
-                </blockquote>
-
-                {/* Client Info */}
-                <div className="flex items-center gap-4">
-                  {/* Avatar */}
-                  <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[var(--color-primary)] to-[var(--color-secondary)] flex items-center justify-center text-black font-bold text-lg">
-                    {testimonial.name[0]}
-                  </div>
+                <div className="mb-5" style={{ color: "var(--lime)", letterSpacing: "3px", fontSize: 15 }}>★★★★★</div>
+                <p className="text-[#d6d6da] text-base mb-7 flex-1">&ldquo;{t.quote}&rdquo;</p>
+                <div className="flex items-center gap-3.5 pt-5" style={{ borderTop: "1px solid var(--hair)" }}>
+                  <span
+                    className="w-[46px] h-[46px] grid place-items-center text-[#0B0B0D]"
+                    style={{ background: AVATAR_BG[i % 3], fontFamily: "var(--font-heading)", fontWeight: 700, fontSize: 15 }}
+                  >
+                    {initials}
+                  </span>
                   <div>
-                    <div
-                      className="text-white font-semibold"
-                      style={{ fontFamily: "var(--font-heading)" }}
-                    >
-                      {testimonial.name}
-                    </div>
-                    <div className="text-sm text-[var(--color-text-muted)]">
-                      {testimonial.role}, {testimonial.company}
-                    </div>
+                    <div className="text-white" style={{ fontFamily: "var(--font-heading)", fontWeight: 600, fontSize: 15 }}>{t.name}</div>
+                    <div className="text-[var(--muted)] text-[13px]">{t.role}, {t.company}</div>
                   </div>
                 </div>
               </motion.div>
-            </AnimatePresence>
-
-            {/* Navigation */}
-            <div className="flex items-center justify-between mt-8">
-              {/* Dots */}
-              <div className="flex items-center gap-2">
-                {TESTIMONIALS.map((_, i) => (
-                  <button
-                    key={i}
-                    onClick={() => setCurrent(i)}
-                    aria-label={`Go to testimonial ${i + 1}`}
-                    className={`transition-all duration-300 rounded-full ${
-                      i === current
-                        ? "w-8 h-2 bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-secondary)]"
-                        : "w-2 h-2 bg-white/20 hover:bg-white/40"
-                    }`}
-                  />
-                ))}
-              </div>
-
-              {/* Arrows */}
-              <div className="flex items-center gap-2">
-                <button
-                  onClick={prev}
-                  aria-label="Previous testimonial"
-                  className="w-9 h-9 rounded-full border border-white/10 flex items-center justify-center text-[var(--color-text-secondary)] hover:text-white hover:border-white/20 hover:bg-white/5 transition-all"
-                  id="testimonial-prev"
-                >
-                  <HiChevronLeft size={18} />
-                </button>
-                <button
-                  onClick={next}
-                  aria-label="Next testimonial"
-                  className="w-9 h-9 rounded-full border border-white/10 flex items-center justify-center text-[var(--color-text-secondary)] hover:text-white hover:border-white/20 hover:bg-white/5 transition-all"
-                  id="testimonial-next"
-                >
-                  <HiChevronRight size={18} />
-                </button>
-              </div>
-            </div>
-          </div>
+            );
+          })}
         </div>
       </div>
     </section>

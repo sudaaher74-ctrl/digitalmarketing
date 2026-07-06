@@ -1,153 +1,76 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { HiArrowRight } from "react-icons/hi2";
 import SectionHeading from "@/components/ui/SectionHeading";
 import { CASE_STUDIES } from "@/lib/constants";
 
-const cardVariants = {
-  hidden: { opacity: 0, y: 40 },
-  visible: (i) => ({
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.5, delay: i * 0.15, ease: "easeOut" },
-  }),
+const META = {
+  "milquu-fresh": {
+    category: "Dairy Products",
+    metrics: [{ v: "+180%", l: "Engagement" }, { v: "100%", l: "Satisfaction" }],
+  },
+  "aiva-enterprises": {
+    category: "Frozen Food Export",
+    metrics: [{ v: "+200%", l: "Credibility" }, { v: "+75%", l: "Inquiries" }],
+  },
+  "os-interior": {
+    category: "Interior Design",
+    metrics: [{ v: "+120%", l: "Leads" }, { v: "+90%", l: "Bookings" }],
+  },
 };
 
 export default function CaseStudies() {
   return (
     <section id="case-studies" className="section">
-      <div className="container mx-auto max-w-[1280px] px-6">
+      <div className="container">
         <SectionHeading
+          number="03"
           subtitle="Case Studies"
-          title="Real Results for Real Businesses"
+          title="Real brands. Real results."
         />
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-          {CASE_STUDIES.map((study, i) => (
-            <motion.div
-              key={study.slug}
-              custom={i}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, amount: 0.15 }}
-              variants={cardVariants}
-              className="glass-card group rounded-2xl overflow-hidden"
-            >
-              {/* Header */}
-              <div
-                className="p-6 pb-4 relative"
-                style={{
-                  background: `linear-gradient(135deg, ${study.color}10, transparent)`,
-                }}
+        <div style={{ border: "1px solid var(--hair)" }}>
+          {CASE_STUDIES.map((study, i) => {
+            const meta = META[study.slug];
+            return (
+              <motion.div
+                key={study.slug}
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.2 }}
+                transition={{ duration: 0.5, delay: i * 0.1 }}
+                className="grid lg:grid-cols-[0.9fr_1.1fr_0.8fr] gap-6 lg:gap-10 items-center px-6 lg:px-10 py-11 transition-colors duration-300 hover:bg-[var(--card)]"
+                style={{ borderBottom: i < CASE_STUDIES.length - 1 ? "1px solid var(--hair)" : "none" }}
               >
-                <div className="flex items-center justify-between mb-3">
-                  <h3
-                    className="text-xl font-bold text-white"
-                    style={{ fontFamily: "var(--font-heading)" }}
-                  >
+                <div>
+                  <div className="uppercase" style={{ fontFamily: "var(--font-heading)", letterSpacing: "1.5px", fontSize: 11, color: "var(--violet)", fontWeight: 600 }}>
+                    {meta.category}
+                  </div>
+                  <h3 className="text-white my-3.5" style={{ fontFamily: "var(--font-heading)", fontSize: 34 }}>
                     {study.title}
                   </h3>
-                  <div
-                    className="w-10 h-10 rounded-full flex items-center justify-center text-lg font-bold"
-                    style={{
-                      background: `${study.color}20`,
-                      color: study.color,
-                    }}
-                  >
-                    {study.title[0]}
+                  <div className="flex flex-wrap gap-2">
+                    {study.services.map((s) => (
+                      <span key={s} className="px-3 py-1 text-xs text-[var(--muted)]" style={{ border: "1px solid var(--hair)", fontFamily: "var(--font-heading)" }}>
+                        {s}
+                      </span>
+                    ))}
                   </div>
                 </div>
-                <div className="flex flex-wrap gap-2">
-                  {study.services.map((s) => (
-                    <span
-                      key={s}
-                      className="text-[10px] font-medium px-2 py-0.5 rounded-full"
-                      style={{
-                        color: study.color,
-                        background: `${study.color}15`,
-                      }}
-                    >
-                      {s}
-                    </span>
-                  ))}
-                </div>
-              </div>
 
-              {/* Body */}
-              <div className="p-6 pt-4 space-y-4">
-                {/* Challenge */}
-                <div>
-                  <div className="flex items-center gap-2 mb-1.5">
-                    <div className="w-1.5 h-1.5 rounded-full bg-red-400" />
-                    <span className="text-xs font-semibold text-red-400 uppercase tracking-wider">
-                      Challenge
-                    </span>
-                  </div>
-                  <p className="text-sm text-[var(--color-text-secondary)] leading-relaxed">
-                    {study.challenge}
-                  </p>
-                </div>
+                <p className="text-[var(--muted)] text-[15px]">{study.solution}</p>
 
-                {/* Solution */}
-                <div>
-                  <div className="flex items-center gap-2 mb-1.5">
-                    <div className="w-1.5 h-1.5 rounded-full bg-[var(--color-primary)]" />
-                    <span className="text-xs font-semibold text-[var(--color-primary)] uppercase tracking-wider">
-                      Solution
-                    </span>
-                  </div>
-                  <p className="text-sm text-[var(--color-text-secondary)] leading-relaxed">
-                    {study.solution}
-                  </p>
-                </div>
-
-                {/* Result */}
-                <div>
-                  <div className="flex items-center gap-2 mb-1.5">
-                    <div className="w-1.5 h-1.5 rounded-full bg-[var(--color-accent)]" />
-                    <span className="text-xs font-semibold text-[var(--color-accent)] uppercase tracking-wider">
-                      Result
-                    </span>
-                  </div>
-                  <p className="text-sm text-[var(--color-text-secondary)] leading-relaxed">
-                    {study.result}
-                  </p>
-                </div>
-
-                {/* Metrics */}
-                <div className="grid grid-cols-3 gap-2 pt-2">
-                  {Object.entries(study.metrics).map(([key, value]) => (
-                    <div
-                      key={key}
-                      className="text-center py-2.5 rounded-lg bg-white/3"
-                    >
-                      <div
-                        className="text-sm font-bold"
-                        style={{ color: study.color }}
-                      >
-                        {value}
-                      </div>
-                      <div className="text-[10px] text-[var(--color-text-muted)] capitalize">
-                        {key}
-                      </div>
+                <div className="flex gap-8">
+                  {meta.metrics.map((m) => (
+                    <div key={m.l}>
+                      <div style={{ fontFamily: "var(--font-heading)", fontWeight: 700, color: "var(--lime)", fontSize: 34, letterSpacing: "-0.03em" }}>{m.v}</div>
+                      <div className="text-[var(--muted)] text-[13px]">{m.l}</div>
                     </div>
                   ))}
                 </div>
-              </div>
-
-              {/* CTA */}
-              <div className="px-6 pb-6">
-                <button className="w-full py-2.5 text-sm font-medium rounded-xl border border-white/5 text-[var(--color-text-secondary)] hover:text-white hover:bg-white/5 hover:border-white/10 transition-all flex items-center justify-center gap-2 group/btn">
-                  View Full Case Study
-                  <HiArrowRight
-                    size={14}
-                    className="transition-transform group-hover/btn:translate-x-1"
-                  />
-                </button>
-              </div>
-            </motion.div>
-          ))}
+              </motion.div>
+            );
+          })}
         </div>
       </div>
     </section>

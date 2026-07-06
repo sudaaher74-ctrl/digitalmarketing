@@ -3,7 +3,14 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { HiOutlineBars3, HiXMark } from "react-icons/hi2";
-import { NAV_LINKS, SITE_CONFIG } from "@/lib/constants";
+import { SITE_CONFIG } from "@/lib/constants";
+
+const NAV_LINKS = [
+  { label: "Services", href: "#services" },
+  { label: "Case Studies", href: "#case-studies" },
+  { label: "Process", href: "#process" },
+  { label: "FAQ", href: "#faq" },
+];
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -15,11 +22,24 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  // Lock body scroll when mobile menu is open
   useEffect(() => {
     document.body.style.overflow = mobileOpen ? "hidden" : "";
     return () => { document.body.style.overflow = ""; };
   }, [mobileOpen]);
+
+  const Logo = () => (
+    <div className="flex items-center gap-3">
+      <span
+        className="w-[38px] h-[38px] grid place-items-center text-[#0B0B0D] font-bold text-base"
+        style={{ background: "var(--lime)", fontFamily: "var(--font-heading)", letterSpacing: "-0.03em" }}
+      >
+        YA
+      </span>
+      <span className="text-lg font-semibold text-white" style={{ fontFamily: "var(--font-heading)" }}>
+        Your Agency
+      </span>
+    </div>
+  );
 
   return (
     <>
@@ -27,101 +47,91 @@ export default function Navbar() {
         initial={{ y: -100 }}
         animate={{ y: 0 }}
         transition={{ duration: 0.6, ease: "easeOut" }}
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-          scrolled ? "glass-nav shadow-lg shadow-black/20" : "bg-transparent"
-        }`}
+        className="fixed top-0 left-0 right-0 z-50 transition-all duration-300"
+        style={
+          scrolled
+            ? {
+                background: "rgba(11,11,13,0.82)",
+                backdropFilter: "blur(14px)",
+                WebkitBackdropFilter: "blur(14px)",
+                borderBottom: "1px solid var(--hair)",
+              }
+            : { borderBottom: "1px solid transparent" }
+        }
       >
-        <div className="container mx-auto max-w-[1280px] px-6 flex items-center justify-between h-[72px]">
-          {/* Logo */}
-          <a href="#hero" className="flex items-center gap-2 group" id="nav-logo">
-            <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-[var(--color-primary)] to-[var(--color-secondary)] flex items-center justify-center text-black font-bold text-sm">
-              YA
-            </div>
-            <span
-              className="text-lg font-bold text-white group-hover:text-[var(--color-primary)] transition-colors"
-              style={{ fontFamily: "var(--font-heading)" }}
-            >
-              {SITE_CONFIG.name}
-            </span>
-          </a>
+        <div className="container flex items-center justify-between h-[74px]">
+          <a href="#hero"><Logo /></a>
 
-          {/* Desktop Nav */}
-          <div className="hidden lg:flex items-center gap-1">
+          <div className="hidden min-[900px]:flex items-center gap-9">
             {NAV_LINKS.map((link) => (
               <a
                 key={link.href}
                 href={link.href}
-                id={`nav-${link.label.toLowerCase()}`}
-                className="px-4 py-2 text-sm font-medium text-[var(--color-text-secondary)] hover:text-white transition-colors rounded-lg hover:bg-white/5"
+                className="text-sm font-medium text-[var(--muted)] hover:text-white transition-colors"
               >
                 {link.label}
               </a>
             ))}
+            <a href="#contact" className="btn-lime !py-2.5 !px-5 !text-sm">
+              Get Free Consultation →
+            </a>
           </div>
 
-          {/* Desktop CTA */}
-          <a
-            href="#contact"
-            className="hidden lg:inline-flex btn-primary text-sm py-2.5 px-6"
-            id="nav-cta"
-          >
-            Get Free Consultation
-          </a>
-
-          {/* Mobile Toggle */}
           <button
-            onClick={() => setMobileOpen(!mobileOpen)}
-            className="lg:hidden p-2 text-white hover:text-[var(--color-primary)] transition-colors"
-            aria-label="Toggle menu"
-            id="nav-mobile-toggle"
+            onClick={() => setMobileOpen(true)}
+            className="min-[900px]:hidden p-2 text-white"
+            aria-label="Open menu"
           >
-            {mobileOpen ? <HiXMark size={26} /> : <HiOutlineBars3 size={26} />}
+            <HiOutlineBars3 size={26} />
           </button>
         </div>
       </motion.nav>
 
-      {/* Mobile Menu */}
       <AnimatePresence>
         {mobileOpen && (
-          <motion.div
-            initial={{ opacity: 0, x: "100%" }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: "100%" }}
-            transition={{ duration: 0.3, ease: "easeInOut" }}
-            className="fixed inset-0 z-40 lg:hidden"
-          >
-            {/* Backdrop */}
-            <div
-              className="absolute inset-0 bg-black/60 backdrop-blur-sm"
+          <>
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="fixed inset-0 z-[55] bg-black/50 min-[900px]:hidden"
               onClick={() => setMobileOpen(false)}
             />
-
-            {/* Menu Panel */}
-            <div className="absolute right-0 top-0 h-full w-[280px] bg-[var(--bg-secondary)] border-l border-white/5 pt-20 px-6 flex flex-col gap-2 overflow-y-auto">
-              {NAV_LINKS.map((link, i) => (
-                <motion.a
+            <motion.div
+              initial={{ x: "100%" }}
+              animate={{ x: 0 }}
+              exit={{ x: "100%" }}
+              transition={{ duration: 0.35, ease: [0.4, 0, 0.2, 1] }}
+              className="fixed top-0 right-0 bottom-0 z-[60] w-[78%] max-w-[340px] min-[900px]:hidden px-8 pt-24 pb-8 flex flex-col gap-1.5"
+              style={{ background: "var(--panel)", borderLeft: "1px solid var(--hair)" }}
+            >
+              <button
+                onClick={() => setMobileOpen(false)}
+                className="absolute top-6 right-6 text-white"
+                aria-label="Close menu"
+              >
+                <HiXMark size={28} />
+              </button>
+              {NAV_LINKS.map((link) => (
+                <a
                   key={link.href}
                   href={link.href}
                   onClick={() => setMobileOpen(false)}
-                  initial={{ opacity: 0, x: 20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: i * 0.05 }}
-                  className="py-3 px-4 text-base font-medium text-[var(--color-text-secondary)] hover:text-white hover:bg-white/5 rounded-lg transition-colors"
+                  className="py-3.5 text-xl font-medium text-white border-b border-[var(--hair)]"
+                  style={{ fontFamily: "var(--font-heading)" }}
                 >
                   {link.label}
-                </motion.a>
-              ))}
-              <div className="mt-6">
-                <a
-                  href="#contact"
-                  onClick={() => setMobileOpen(false)}
-                  className="btn-primary w-full justify-center text-sm"
-                >
-                  Get Free Consultation
                 </a>
-              </div>
-            </div>
-          </motion.div>
+              ))}
+              <a
+                href="#contact"
+                onClick={() => setMobileOpen(false)}
+                className="btn-lime w-full justify-center mt-5"
+              >
+                Get Free Consultation →
+              </a>
+            </motion.div>
+          </>
         )}
       </AnimatePresence>
     </>

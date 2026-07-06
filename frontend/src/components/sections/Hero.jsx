@@ -1,200 +1,139 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { HiArrowRight, HiEye } from "react-icons/hi2";
-import ParticlesBackground from "@/components/ui/ParticlesBackground";
 import AnimatedCounter from "@/components/ui/AnimatedCounter";
 import { STATS } from "@/lib/constants";
 
+const bars = [34, 48, 42, 64, 56, 88, 100];
+const progs = [
+  { label: "Leads", w: 72 },
+  { label: "Convert", w: 90 },
+  { label: "Traffic", w: 84 },
+];
+
 export default function Hero() {
   return (
-    <section
-      id="hero"
-      className="relative min-h-screen flex items-center justify-center overflow-hidden"
-    >
-      <ParticlesBackground />
-
-      {/* Gradient Orbs */}
-      <div className="absolute top-20 left-10 w-[400px] h-[400px] bg-[var(--color-primary)]/10 rounded-full blur-[120px] pointer-events-none" />
-      <div className="absolute bottom-20 right-10 w-[350px] h-[350px] bg-[var(--color-secondary)]/10 rounded-full blur-[120px] pointer-events-none" />
-
-      <div className="container mx-auto max-w-[1280px] px-6 relative z-10 pt-24 pb-16">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-8 items-center">
-          {/* Left: Content */}
-          <div className="max-w-2xl">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-              className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-white/10 bg-white/5 mb-6"
-            >
-              <span className="glow-dot" />
-              <span className="text-xs font-medium text-[var(--color-text-secondary)]">
-                Digital Marketing Agency
-              </span>
-            </motion.div>
-
-            <motion.h1
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.1 }}
-              className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-[1.1] mb-6"
-              style={{ fontFamily: "var(--font-heading)" }}
-            >
-              Helping Businesses Grow Through{" "}
-              <span className="gradient-text-hero">Digital Marketing</span> &{" "}
-              <span className="gradient-text">High-Converting Websites</span>
-            </motion.h1>
-
-            <motion.p
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="text-base sm:text-lg text-[var(--color-text-secondary)] leading-relaxed mb-8 max-w-xl"
-            >
-              We create powerful digital experiences that generate leads, increase
-              sales, and build strong brands.
-            </motion.p>
-
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.3 }}
-              className="flex flex-wrap gap-4"
-            >
-              <a href="#contact" className="btn-primary" id="hero-cta-consultation">
-                Get Free Consultation
-                <HiArrowRight size={18} />
-              </a>
-              <a href="#portfolio" className="btn-secondary" id="hero-cta-work">
-                <HiEye size={18} />
-                View Our Work
-              </a>
-            </motion.div>
-          </div>
-
-          {/* Right: Dashboard Preview */}
+    <section id="hero" className="relative overflow-hidden">
+      <div className="container pt-[150px] pb-[90px]">
+        <div className="grid lg:grid-cols-[1.05fr_0.95fr] gap-14 lg:gap-16 items-center">
+          {/* Left */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.9, y: 40 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.3 }}
-            className="relative hidden lg:block"
+            initial={{ opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
           >
-            {/* Main Dashboard Card */}
-            <div className="glass-card p-6 rounded-2xl">
-              {/* Mini toolbar */}
-              <div className="flex items-center gap-2 mb-5">
-                <div className="w-3 h-3 rounded-full bg-red-500/80" />
-                <div className="w-3 h-3 rounded-full bg-yellow-500/80" />
-                <div className="w-3 h-3 rounded-full bg-green-500/80" />
-                <span className="ml-3 text-xs text-[var(--color-text-muted)]">Marketing Dashboard</span>
+            <span
+              className="inline-flex items-center gap-2 border border-[var(--hair)] rounded-full px-4 py-2 mb-7 uppercase text-[var(--muted)]"
+              style={{ fontFamily: "var(--font-heading)", fontSize: 12, letterSpacing: "1.5px", fontWeight: 600 }}
+            >
+              <span className="w-2 h-2 rounded-full" style={{ background: "var(--lime)" }} />
+              Digital Marketing Agency
+            </span>
+
+            <h1 className="text-white mb-6" style={{ fontFamily: "var(--font-heading)", fontSize: "clamp(44px, 6.4vw, 84px)" }}>
+              Growth for brands that refuse to{" "}
+              <span style={{ color: "var(--lime)" }}>blend in.</span>
+            </h1>
+
+            <p className="text-[var(--muted)] text-lg max-w-[480px] mb-9">
+              We build high-converting websites and run marketing that generates leads,
+              drives sales, and makes your brand impossible to ignore.
+            </p>
+
+            <div className="flex flex-wrap gap-3.5">
+              <a href="#contact" className="btn-lime">Get Free Consultation →</a>
+              <a href="#case-studies" className="btn-outline">View Our Work</a>
+            </div>
+          </motion.div>
+
+          {/* Right: analytics card */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.2 }}
+            className="relative"
+          >
+            <div className="p-7" style={{ background: "var(--card)", border: "1px solid var(--hair)" }}>
+              <div className="flex items-center gap-2.5">
+                <span className="w-2 h-2 rounded-full" style={{ background: "var(--lime)" }} />
+                <span className="uppercase text-[var(--muted)]" style={{ fontFamily: "var(--font-heading)", letterSpacing: "1.5px", fontSize: 11 }}>
+                  Live Campaign — last 30 days
+                </span>
               </div>
 
-              {/* Chart Area */}
-              <div className="mb-4">
-                <div className="flex items-end justify-between mb-2">
-                  <span className="text-xs text-[var(--color-text-muted)]">Revenue Growth</span>
-                  <span className="text-xs text-[var(--color-accent)] font-semibold">+67%</span>
-                </div>
-                <svg viewBox="0 0 400 100" className="w-full h-24">
-                  <defs>
-                    <linearGradient id="chartGrad" x1="0" y1="0" x2="0" y2="1">
-                      <stop offset="0%" stopColor="var(--color-primary)" stopOpacity="0.3" />
-                      <stop offset="100%" stopColor="var(--color-primary)" stopOpacity="0" />
-                    </linearGradient>
-                  </defs>
-                  <motion.path
-                    d="M0 80 Q50 70 80 60 T160 40 T240 50 T320 20 T400 10"
-                    fill="none"
-                    stroke="var(--color-primary)"
-                    strokeWidth="2.5"
-                    initial={{ pathLength: 0 }}
-                    animate={{ pathLength: 1 }}
-                    transition={{ duration: 2, delay: 0.8 }}
+              <div className="flex items-baseline gap-3 mt-5 mb-1">
+                <span className="text-white" style={{ fontFamily: "var(--font-heading)", fontWeight: 700, fontSize: 52, letterSpacing: "-0.03em" }}>+67%</span>
+                <span style={{ color: "var(--lime)", fontFamily: "var(--font-heading)", fontWeight: 600, fontSize: 15 }}>▲ revenue growth</span>
+              </div>
+              <div className="text-[var(--muted-2)] text-[13px]">vs. previous period</div>
+
+              {/* Bars */}
+              <div className="flex items-end gap-2.5 h-[140px] my-6">
+                {bars.map((h, i) => (
+                  <motion.div
+                    key={i}
+                    className="flex-1"
+                    style={{ background: h >= 80 ? "var(--lime)" : "#1f1f24" }}
+                    initial={{ height: 0 }}
+                    whileInView={{ height: `${h}%` }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.9, delay: 0.3 + i * 0.06, ease: [0.2, 0.8, 0.2, 1] }}
                   />
-                  <path
-                    d="M0 80 Q50 70 80 60 T160 40 T240 50 T320 20 T400 10 V100 H0 Z"
-                    fill="url(#chartGrad)"
-                    opacity="0.5"
-                  />
-                </svg>
+                ))}
               </div>
 
-              {/* Mini Stat Bars */}
-              <div className="grid grid-cols-3 gap-3">
-                {["Leads", "Conversions", "Traffic"].map((label, i) => (
-                  <div key={label} className="bg-white/3 rounded-lg p-3">
-                    <div className="text-[10px] text-[var(--color-text-muted)] mb-1">{label}</div>
-                    <motion.div
-                      className="h-1.5 rounded-full bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-secondary)]"
-                      initial={{ width: 0 }}
-                      animate={{ width: `${60 + i * 15}%` }}
-                      transition={{ duration: 1, delay: 1.2 + i * 0.2 }}
-                    />
+              {/* Mini progress */}
+              <div className="grid grid-cols-3 gap-3.5 pt-5" style={{ borderTop: "1px solid var(--hair)" }}>
+                {progs.map((p, i) => (
+                  <div key={p.label}>
+                    <div className="uppercase text-[var(--muted-2)] mb-2" style={{ fontFamily: "var(--font-heading)", fontSize: 10, letterSpacing: "1px" }}>{p.label}</div>
+                    <div className="h-1" style={{ background: "#1f1f24" }}>
+                      <motion.div
+                        className="h-full"
+                        style={{ background: "var(--lime)" }}
+                        initial={{ width: 0 }}
+                        whileInView={{ width: `${p.w}%` }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 1.1, delay: 0.6 + i * 0.15 }}
+                      />
+                    </div>
                   </div>
                 ))}
               </div>
             </div>
 
-            {/* Floating Cards */}
-            <motion.div
-              animate={{ y: [0, -10, 0] }}
-              transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-              className="absolute -top-4 -right-4 glass-card p-3 rounded-xl"
-            >
-              <div className="flex items-center gap-2">
-                <div className="w-8 h-8 rounded-lg bg-[var(--color-accent)]/20 flex items-center justify-center">
-                  <span className="text-[var(--color-accent)] text-sm">📈</span>
-                </div>
-                <div>
-                  <div className="text-xs font-semibold text-white">+180%</div>
-                  <div className="text-[10px] text-[var(--color-text-muted)]">Growth Rate</div>
-                </div>
+            {/* Floating chips */}
+            <div className="absolute -top-6 -right-5 float-1 hidden sm:flex items-center gap-3 p-3" style={{ background: "var(--panel)", border: "1px solid var(--hair)" }}>
+              <span className="w-[30px] h-[30px] grid place-items-center text-sm" style={{ border: "1px solid var(--hair)", color: "var(--lime)" }}>↗</span>
+              <div>
+                <div className="text-white" style={{ fontFamily: "var(--font-heading)", fontWeight: 700, fontSize: 16, lineHeight: 1 }}>+180%</div>
+                <div className="text-[var(--muted)] text-[11px]">Engagement</div>
               </div>
-            </motion.div>
-
-            <motion.div
-              animate={{ y: [0, 12, 0] }}
-              transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-              className="absolute -bottom-4 -left-4 glass-card p-3 rounded-xl"
-            >
-              <div className="flex items-center gap-2">
-                <div className="w-8 h-8 rounded-lg bg-[var(--color-secondary)]/20 flex items-center justify-center">
-                  <span className="text-[var(--color-secondary)] text-sm">🎯</span>
-                </div>
-                <div>
-                  <div className="text-xs font-semibold text-white">98.5%</div>
-                  <div className="text-[10px] text-[var(--color-text-muted)]">Satisfaction</div>
-                </div>
+            </div>
+            <div className="absolute -bottom-6 -left-5 float-2 hidden sm:flex items-center gap-3 p-3" style={{ background: "var(--panel)", border: "1px solid var(--hair)" }}>
+              <span className="w-[30px] h-[30px] grid place-items-center text-sm" style={{ border: "1px solid var(--hair)", color: "var(--violet)" }}>◎</span>
+              <div>
+                <div className="text-white" style={{ fontFamily: "var(--font-heading)", fontWeight: 700, fontSize: 16, lineHeight: 1 }}>98.5%</div>
+                <div className="text-[var(--muted)] text-[11px]">Satisfaction</div>
               </div>
-            </motion.div>
+            </div>
           </motion.div>
         </div>
 
-        {/* Stats Bar */}
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.6 }}
-          className="mt-16 lg:mt-24 grid grid-cols-2 sm:grid-cols-4 gap-6"
+        {/* Stat row */}
+        <div
+          className="mt-[70px] grid grid-cols-2 md:grid-cols-4"
+          style={{ background: "var(--hair)", gap: 1, border: "1px solid var(--hair)" }}
         >
-          {STATS.map((stat, i) => (
-            <div
-              key={stat.label}
-              className="glass-card text-center py-6 px-4 rounded-xl"
-            >
-              <div
-                className="text-3xl sm:text-4xl font-bold gradient-text mb-1"
-                style={{ fontFamily: "var(--font-heading)" }}
-              >
+          {STATS.map((stat) => (
+            <div key={stat.label} className="px-7 py-9" style={{ background: "var(--canvas)" }}>
+              <div style={{ fontFamily: "var(--font-heading)", fontWeight: 700, fontSize: 44, color: "var(--lime)", letterSpacing: "-0.03em" }}>
                 <AnimatedCounter value={stat.value} suffix={stat.suffix} />
               </div>
-              <div className="text-xs sm:text-sm text-[var(--color-text-secondary)]">
-                {stat.label}
-              </div>
+              <div className="text-[var(--muted)] text-sm mt-1.5">{stat.label}</div>
             </div>
           ))}
-        </motion.div>
+        </div>
       </div>
     </section>
   );

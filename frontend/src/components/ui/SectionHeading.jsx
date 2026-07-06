@@ -2,29 +2,37 @@
 
 import { motion } from "framer-motion";
 
-export default function SectionHeading({ title, subtitle, center = true, light = false }) {
+export default function SectionHeading({ number, title, subtitle, lede, center = false }) {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 30 }}
+      initial={{ opacity: 0, y: 24 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.5 }}
       transition={{ duration: 0.6, ease: "easeOut" }}
-      className={`mb-16 ${center ? "text-center" : ""}`}
+      className={`mb-14 ${center ? "text-center max-w-2xl mx-auto" : ""} ${
+        lede ? "grid md:grid-cols-2 gap-10 items-end" : ""
+      }`}
     >
-      {subtitle && (
-        <span className="inline-block mb-3 text-sm font-semibold uppercase tracking-[0.2em] text-[var(--color-primary)]">
+      <div>
+        <span className="label block">
+          {number ? `${number} — ` : ""}
           {subtitle}
         </span>
+        <h2
+          className="mt-4 text-white"
+          style={{
+            fontFamily: "var(--font-heading)",
+            fontSize: "clamp(32px, 4.4vw, 52px)",
+          }}
+        >
+          {title}
+        </h2>
+      </div>
+      {lede && (
+        <p className="text-[var(--muted)] text-lg max-w-md md:justify-self-end">
+          {lede}
+        </p>
       )}
-      <h2
-        className={`text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight ${
-          light ? "text-white" : "gradient-text"
-        }`}
-        style={{ fontFamily: "var(--font-heading)" }}
-      >
-        {title}
-      </h2>
-      <div className="mt-5 mx-auto h-1 w-20 rounded-full bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-secondary)]" />
     </motion.div>
   );
 }

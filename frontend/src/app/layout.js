@@ -1,15 +1,16 @@
-import { Inter, Outfit } from "next/font/google";
+import { Space_Grotesk, Instrument_Sans } from "next/font/google";
 import "./globals.css";
 
-const inter = Inter({
+const instrumentSans = Instrument_Sans({
   subsets: ["latin"],
-  variable: "--font-inter",
+  variable: "--font-instrument",
   display: "swap",
 });
 
-const outfit = Outfit({
+const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
-  variable: "--font-outfit",
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-space",
   display: "swap",
 });
 
@@ -87,7 +88,7 @@ export default function RootLayout({ children }) {
   };
 
   return (
-    <html lang="en" className={`${inter.variable} ${outfit.variable}`}>
+    <html lang="en" className={`${instrumentSans.variable} ${spaceGrotesk.variable}`}>
       <head>
         <script
           type="application/ld+json"
@@ -97,7 +98,7 @@ export default function RootLayout({ children }) {
       <body
         className="min-h-screen antialiased"
         style={{
-          fontFamily: "'Inter', sans-serif",
+          fontFamily: "var(--font-body)",
         }}
       >
         {children}
