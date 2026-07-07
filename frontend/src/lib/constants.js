@@ -31,7 +31,7 @@ export const STATS = [
 
 export const CLIENTS = [
   {
-    name: "AIVA Enterprises",
+    name: "aivaenterprises",
     industry: "Frozen Food Export",
     services: ["Website Development", "SEO Optimization", "Product Showcase"],
     description: "A premium frozen food export company requiring a corporate web presence to establish trust with international clients.",
@@ -39,7 +39,7 @@ export const CLIENTS = [
     link: "https://aivaenterprises.com"
   },
   {
-    name: "Milquu Fresh",
+    name: "milquufresh",
     industry: "Dairy Products",
     services: ["Website Development", "Branding", "Mobile Optimization"],
     description: "A dairy brand looking to build a strong digital presence with modern branding and mobile-first approach.",
@@ -47,7 +47,7 @@ export const CLIENTS = [
     link: "https://milquufresh.in"
   },
   {
-    name: "OS Interior",
+    name: "osinterior",
     industry: "Interior Design",
     services: ["Portfolio Website", "Lead Generation", "Responsive Design"],
     description: "An interior design studio needing a stunning portfolio to showcase projects and generate leads online.",
@@ -55,7 +55,7 @@ export const CLIENTS = [
     link: "https://osinterior.in"
   },
   {
-    name: "Brand Kettle",
+    name: "brandkettle",
     industry: "E-Commerce",
     services: ["E-Commerce Website", "SEO Optimization", "Branding"],
     description: "A comprehensive digital presence and e-commerce platform for a growing brand.",
@@ -63,7 +63,7 @@ export const CLIENTS = [
     link: "https://brandkettle.co.in"
   },
   {
-    name: "Drona Archery",
+    name: "dronaarchery",
     industry: "Sports Equipment",
     services: ["Online Store", "Performance Marketing", "Social Media"],
     description: "An online store for premium archery equipment, designed for better conversions.",
@@ -140,7 +140,7 @@ export const WHY_CHOOSE_US = [
 
 export const CASE_STUDIES = [
   {
-    title: "Milquu Fresh",
+    title: "milquufresh",
     slug: "milquu-fresh",
     category: "Dairy Products",
     challenge: "Build a strong online presence for a dairy brand entering the competitive market with no digital footprint.",
@@ -225,7 +225,7 @@ export const CASE_STUDIES = [
     ]
   },
   {
-    title: "AIVA Enterprises",
+    title: "aivaenterprises",
     slug: "aiva-enterprises",
     category: "Frozen Food Export",
     challenge: "Establish trust and credibility for an export-focused business targeting international clients.",
@@ -238,7 +238,7 @@ export const CASE_STUDIES = [
     details: [
       {
         title: "🎯 Project Overview",
-        content: "The Aiva 2 project is a comprehensive enterprise system built for AIVA Enterprises. It consists of a public-facing website, a secure internal admin dashboard, and a robust backend API to handle everything from product inquiries to inventory and purchase order management. The project is structured as a monorepo containing three main workspaces: frontend, admin, and backend."
+        content: "The aivaenterprises project is a comprehensive enterprise system built for aivaenterprises. It consists of a public-facing website, a secure internal admin dashboard, and a robust backend API to handle everything from product inquiries to inventory and purchase order management. The project is structured as a monorepo containing three main workspaces: frontend, admin, and backend."
       },
       {
         title: "🏗 Architecture & Tech Stack",
@@ -284,7 +284,7 @@ export const CASE_STUDIES = [
       {
         title: "🗄️ Core Domain Models (Database)",
         items: [
-          { label: "Product", desc: "Details of products sold by AIVA Enterprises." },
+          { label: "Product", desc: "Details of products sold by aivaenterprises." },
           { label: "Inventory", desc: "Stock levels and tracking." },
           { label: "Customer", desc: "Profiles of B2B or B2C clients." },
           { label: "Inquiry", desc: "Leads or questions captured from the frontend (often via the chatbot)." },
@@ -306,7 +306,7 @@ export const CASE_STUDIES = [
     ]
   },
   {
-    title: "OS Interior",
+    title: "osinterior",
     slug: "os-interior",
     category: "Interior Design",
     challenge: "Generate quality leads through an online portfolio that showcases design expertise effectively.",
@@ -319,7 +319,7 @@ export const CASE_STUDIES = [
     details: [
       {
         title: "🎯 Project Overview",
-        content: "OS Interiors is a comprehensive full-stack web application designed for a premium interior design agency. It serves a dual purpose: 1. Client-Facing Portal: A beautifully crafted, highly interactive website to showcase the agency's portfolio (residential, commercial, and hospitality projects). 2. Internal ERP/CRM System: A robust administrative backend that manages employees, tracks leads, handles site attendance via geolocation, and generates dynamic work reports."
+        content: "osinteriors is a comprehensive full-stack web application designed for a premium interior design agency. It serves a dual purpose: 1. Client-Facing Portal: A beautifully crafted, highly interactive website to showcase the agency's portfolio (residential, commercial, and hospitality projects). 2. Internal ERP/CRM System: A robust administrative backend that manages employees, tracks leads, handles site attendance via geolocation, and generates dynamic work reports."
       },
       {
         title: "💻 Tech Stack",
@@ -389,7 +389,7 @@ export const CASE_STUDIES = [
     ]
   },
   {
-    title: "Brand Kettle BuildSpaces",
+    title: "brandkettle",
     slug: "brand-kettle",
     category: "Interior Design & E-Commerce",
     challenge: "Develop a high-converting e-commerce platform with a strong brand identity.",
@@ -402,7 +402,7 @@ export const CASE_STUDIES = [
     details: [
       {
         title: "📌 Project Overview",
-        content: "Brand Kettle BuildSpaces is a premium, high-performance web application designed to serve as a digital storefront and administrative platform. Built with a 'mobile-first' approach, the application delivers immersive 3D experiences, smooth scrolling animations, and dynamic data presentation to showcase the client's expertise in commercial fit-outs, residential interiors, and custom furniture. I engineered a bespoke Headless CMS from the ground up to ensure full control over content."
+        content: "brandkettle is a premium, high-performance web application designed to serve as a digital storefront and administrative platform. Built with a 'mobile-first' approach, the application delivers immersive 3D experiences, smooth scrolling animations, and dynamic data presentation to showcase the client's expertise in commercial fit-outs, residential interiors, and custom furniture. I engineered a bespoke Headless CMS from the ground up to ensure full control over content."
       },
       {
         title: "🛠 Technology Stack",
@@ -449,7 +449,7 @@ export const CASE_STUDIES = [
     ]
   },
   {
-    title: "Drona Archery Academy",
+    title: "dronaarchery",
     slug: "drona-archery",
     category: "Sports",
     challenge: "Create a digital storefront to sell specialized sports equipment to a niche audience.",
@@ -462,7 +462,7 @@ export const CASE_STUDIES = [
     details: [
       {
         title: "🎯 Project Overview",
-        content: "Drona Archery Academy (Sidhi Project) is a modern, high-performance marketing & lead generation web application built to promote Drona Archery Academy located in New Panvel, Navi Mumbai. The site aims to drive local student enrollments, highlight professional coaching services, and establish authority in Olympic recurve and compound bow training."
+        content: "dronaarchery (Sidhi Project) is a modern, high-performance marketing & lead generation web application built to promote dronaarchery located in New Panvel, Navi Mumbai. The site aims to drive local student enrollments, highlight professional coaching services, and establish authority in Olympic recurve and compound bow training."
       },
       {
         title: "🛠 Tech Stack & Architecture",
@@ -563,21 +563,21 @@ export const PROCESS_STEPS = [
 export const TESTIMONIALS = [
   {
     name: "Rahul Sharma",
-    company: "AIVA Enterprises",
+    company: "aivaenterprises",
     role: "Managing Director",
     quote: "Working with My Agency transformed our digital presence completely. Their team understood our export business needs and delivered a website that truly represents our brand internationally. The attention to detail and professionalism was exceptional.",
     rating: 5,
   },
   {
     name: "Priya Patel",
-    company: "Milquu Fresh",
+    company: "milquufresh",
     role: "Founder",
     quote: "From branding to website development, they handled everything with incredible creativity and precision. Our online presence has never looked better, and we're seeing real results in customer engagement. Highly recommended!",
     rating: 5,
   },
   {
     name: "Omkar Deshmukh",
-    company: "OS Interior",
+    company: "osinterior",
     role: "Creative Director",
     quote: "The portfolio website they built for us is stunning. It perfectly showcases our interior design projects and has significantly increased our lead generation. Their responsive design ensures it looks amazing on every device.",
     rating: 5,
