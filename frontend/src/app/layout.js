@@ -1,4 +1,6 @@
 import { Space_Grotesk, Instrument_Sans } from "next/font/google";
+import Navbar from "@/components/layout/Navbar";
+import Footer from "@/components/layout/Footer";
 import "./globals.css";
 
 const instrumentSans = Instrument_Sans({
@@ -101,7 +103,9 @@ export default function RootLayout({ children }) {
           fontFamily: "var(--font-body)",
         }}
       >
-        {children}
+        <Navbar />
+        <main>{children}</main>
+        <Footer />
       </body>
     </html>
   );

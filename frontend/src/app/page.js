@@ -1,5 +1,3 @@
-import Navbar from "@/components/layout/Navbar";
-import Footer from "@/components/layout/Footer";
 import Hero from "@/components/sections/Hero";
 import TrustedBy from "@/components/sections/TrustedBy";
 import Services from "@/components/sections/Services";
@@ -64,9 +62,7 @@ export default function Home() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
       />
-      <Navbar />
-      <main>
-        <Hero />
+      <Hero />
         <TrustedBy />
         <Services />
         <WhyChooseUs />
@@ -75,8 +71,6 @@ export default function Home() {
         <Testimonials />
         <FAQ />
         <Contact />
-      </main>
-      <Footer />
     </>
   );
 }
