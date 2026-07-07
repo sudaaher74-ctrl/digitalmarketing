@@ -7,10 +7,11 @@ import Link from "next/link";
 import { SITE_CONFIG, CASE_STUDIES } from "@/lib/constants";
 
 const NAV_LINKS = [
-  { label: "Services", href: "#services" },
+  { label: "About", href: "/about" },
+  { label: "Services", href: "/#services" },
   { label: "Projects", isDropdown: true },
-  { label: "Process", href: "#process" },
-  { label: "FAQ", href: "#faq" },
+  { label: "Process", href: "/#process" },
+  { label: "FAQ", href: "/#faq" },
 ];
 
 export default function Navbar() {
@@ -61,7 +62,7 @@ export default function Navbar() {
         }
       >
         <div className="container flex items-center justify-between h-[74px]">
-          <a href="#hero"><Logo /></a>
+          <Link href="/"><Logo /></Link>
 
           <div className="hidden min-[900px]:flex items-center gap-9">
             {NAV_LINKS.map((link) => (
@@ -81,18 +82,18 @@ export default function Navbar() {
                   </div>
                 </div>
               ) : (
-                <a
+                <Link
                   key={link.href}
                   href={link.href}
                   className="text-sm font-medium text-[var(--muted)] hover:text-white transition-colors py-4"
                 >
                   {link.label}
-                </a>
+                </Link>
               )
             ))}
-            <a href="#contact" className="btn-lime !py-2.5 !px-5 !text-sm">
+            <Link href="/#contact" className="btn-lime !py-2.5 !px-5 !text-sm">
               Get Free Consultation →
-            </a>
+            </Link>
           </div>
 
           <button
@@ -143,7 +144,7 @@ export default function Navbar() {
                     </div>
                   </div>
                 ) : (
-                  <a
+                  <Link
                     key={link.href}
                     href={link.href}
                     onClick={() => setMobileOpen(false)}
@@ -151,16 +152,16 @@ export default function Navbar() {
                     style={{ fontFamily: "var(--font-heading)" }}
                   >
                     {link.label}
-                  </a>
+                  </Link>
                 )
               ))}
-              <a
-                href="#contact"
+              <Link
+                href="/#contact"
                 onClick={() => setMobileOpen(false)}
                 className="btn-lime w-full justify-center mt-5"
               >
                 Get Free Consultation →
-              </a>
+              </Link>
             </motion.div>
           </>
         )}

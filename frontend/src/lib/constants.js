@@ -201,6 +201,25 @@ export const CASE_STUDIES = [
   }
 ];
 
+export const TEAM_MEMBERS = [
+  {
+    name: "Sudarshan",
+    role: "Founder",
+    initials: "SU",
+    color: "var(--lime)",
+    expertise: ["Development", "Project Planning", "Strategy"],
+    bio: "Passionate about building scalable digital solutions and strategizing project roadmaps to deliver exceptional results."
+  },
+  {
+    name: "Sidhi Deshmukh",
+    role: "Co-Founder",
+    initials: "SD",
+    color: "var(--violet)",
+    expertise: ["Website Design", "SEO", "User Experience"],
+    bio: "Creative mind focused on designing beautiful, intuitive interfaces and optimizing digital presence for search engines."
+  }
+];
+
 export const PROCESS_STEPS = [
   {
     step: 1,
