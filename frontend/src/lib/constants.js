@@ -3,9 +3,9 @@ export const SITE_CONFIG = {
   name: "Your Agency Name",
   tagline: "Digital Marketing & Web Solutions",
   email: "hello@youragencyname.com",
-  phone: "+91 98765 43210",
+  phone: "+91 87670 67884",
   address: "Mumbai, Maharashtra, India",
-  whatsapp: "919876543210",
+  whatsapp: "918767067884",
   social: {
     instagram: "https://instagram.com/youragencyname",
     facebook: "https://facebook.com/youragencyname",

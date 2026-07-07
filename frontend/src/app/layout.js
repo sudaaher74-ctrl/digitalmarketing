@@ -78,7 +78,7 @@ export default function RootLayout({ children }) {
       "Digital marketing and web development agency helping businesses grow through powerful digital experiences.",
     contactPoint: {
       "@type": "ContactPoint",
-      telephone: "+91-98765-43210",
+      telephone: "+91-87670-67884",
       contactType: "customer service",
       availableLanguage: ["English", "Hindi"],
     },
