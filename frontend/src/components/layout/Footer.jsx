@@ -37,7 +37,7 @@ export default function Footer() {
           <div>
             <div className="flex items-center gap-3 mb-4.5" style={{ marginBottom: 18 }}>
               <span className="w-[38px] h-[38px] grid place-items-center text-[#0B0B0D] font-bold text-base" style={{ background: "var(--lime)", fontFamily: "var(--font-heading)", letterSpacing: "-0.03em" }}>YA</span>
-              <span className="text-lg font-semibold text-white" style={{ fontFamily: "var(--font-heading)" }}>Your Agency</span>
+              <span className="text-lg font-semibold text-white" style={{ fontFamily: "var(--font-heading)" }}>My Agency</span>
             </div>
             <p className="text-[var(--muted)] text-[15px] max-w-[260px]">
               Digital marketing &amp; web solutions for brands that refuse to blend in.
@@ -59,7 +59,7 @@ export default function Footer() {
         </div>
 
         <div className="flex flex-col sm:flex-row justify-between gap-3 py-6" style={{ borderTop: "1px solid var(--hair)" }}>
-          <span className="text-[var(--muted-2)] text-[13px]">© {new Date().getFullYear()} Your Agency. All rights reserved.</span>
+          <span className="text-[var(--muted-2)] text-[13px]">© {new Date().getFullYear()} My Agency. All rights reserved.</span>
           <span className="text-[var(--muted-2)] text-[13px]">Mumbai · Maharashtra · India</span>
         </div>
       </div>

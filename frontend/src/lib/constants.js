@@ -1,6 +1,6 @@
 // Site-wide constants and data
 export const SITE_CONFIG = {
-  name: "Your Agency Name",
+  name: "My Agency",
   tagline: "Digital Marketing & Web Solutions",
   email: "hello@youragencyname.com",
   phone: "+91 87670 67884",
@@ -565,7 +565,7 @@ export const TESTIMONIALS = [
     name: "Rahul Sharma",
     company: "AIVA Enterprises",
     role: "Managing Director",
-    quote: "Working with Your Agency Name transformed our digital presence completely. Their team understood our export business needs and delivered a website that truly represents our brand internationally. The attention to detail and professionalism was exceptional.",
+    quote: "Working with My Agency transformed our digital presence completely. Their team understood our export business needs and delivered a website that truly represents our brand internationally. The attention to detail and professionalism was exceptional.",
     rating: 5,
   },
   {

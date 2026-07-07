@@ -2,8 +2,8 @@ import { TEAM_MEMBERS } from "@/lib/constants";
 import SectionHeading from "@/components/ui/SectionHeading";
 
 export const metadata = {
-  title: "About Us | Your Agency",
-  description: "Learn more about the team behind Your Agency and our mission to deliver exceptional digital experiences.",
+  title: "About Us | My Agency",
+  description: "Learn more about the team behind My Agency and our mission to deliver exceptional digital experiences.",
 };
 
 export default function AboutPage() {

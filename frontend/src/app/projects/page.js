@@ -1,7 +1,7 @@
 import CaseStudies from "@/components/sections/CaseStudies";
 
 export const metadata = {
-  title: "Projects | Your Agency",
+  title: "Projects | My Agency",
   description: "View our portfolio of case studies and successful digital marketing projects.",
 };
 

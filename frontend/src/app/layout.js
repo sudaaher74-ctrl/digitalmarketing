@@ -17,7 +17,7 @@ const spaceGrotesk = Space_Grotesk({
 });
 
 export const metadata = {
-  title: "Your Agency Name | Digital Marketing & Web Development Agency",
+  title: "My Agency | Digital Marketing & Web Development Agency",
   description:
     "We help businesses grow through powerful digital marketing strategies, high-converting websites, SEO optimization, Google Ads, and branding solutions. Get a free consultation today.",
   keywords: [
@@ -29,14 +29,14 @@ export const metadata = {
     "branding",
     "website design",
   ],
-  authors: [{ name: "Your Agency Name" }],
-  creator: "Your Agency Name",
+  authors: [{ name: "My Agency" }],
+  creator: "My Agency",
   openGraph: {
     type: "website",
     locale: "en_US",
     url: "https://youragencyname.com",
-    siteName: "Your Agency Name",
-    title: "Your Agency Name | Digital Marketing & Web Development Agency",
+    siteName: "My Agency",
+    title: "My Agency | Digital Marketing & Web Development Agency",
     description:
       "We create powerful digital experiences that generate leads, increase sales, and build strong brands.",
     images: [
@@ -44,13 +44,13 @@ export const metadata = {
         url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: "Your Agency Name - Digital Marketing Agency",
+        alt: "My Agency - Digital Marketing Agency",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Your Agency Name | Digital Marketing Agency",
+    title: "My Agency | Digital Marketing Agency",
     description:
       "We create powerful digital experiences that generate leads, increase sales, and build strong brands.",
     images: ["/og-image.png"],
@@ -72,7 +72,7 @@ export default function RootLayout({ children }) {
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "Organization",
-    name: "Your Agency Name",
+    name: "My Agency",
     url: "https://youragencyname.com",
     description:
       "Digital marketing and web development agency helping businesses grow through powerful digital experiences.",

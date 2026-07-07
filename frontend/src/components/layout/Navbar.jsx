@@ -23,7 +23,7 @@ const Logo = () => (
       YA
     </span>
     <span className="text-lg font-semibold text-white" style={{ fontFamily: "var(--font-heading)" }}>
-      Your Agency
+      My Agency
     </span>
   </div>
 );
