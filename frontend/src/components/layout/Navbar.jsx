@@ -14,6 +14,20 @@ const NAV_LINKS = [
   { label: "FAQ", href: "/#faq" },
 ];
 
+const Logo = () => (
+  <div className="flex items-center gap-3">
+    <span
+      className="w-[38px] h-[38px] grid place-items-center text-[#0B0B0D] font-bold text-base"
+      style={{ background: "var(--lime)", fontFamily: "var(--font-heading)", letterSpacing: "-0.03em" }}
+    >
+      YA
+    </span>
+    <span className="text-lg font-semibold text-white" style={{ fontFamily: "var(--font-heading)" }}>
+      Your Agency
+    </span>
+  </div>
+);
+
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -28,21 +42,6 @@ export default function Navbar() {
     document.body.style.overflow = mobileOpen ? "hidden" : "";
     return () => { document.body.style.overflow = ""; };
   }, [mobileOpen]);
-
-  const Logo = () => (
-    <div className="flex items-center gap-3">
-      <span
-        className="w-[38px] h-[38px] grid place-items-center text-[#0B0B0D] font-bold text-base"
-        style={{ background: "var(--lime)", fontFamily: "var(--font-heading)", letterSpacing: "-0.03em" }}
-      >
-        YA
-      </span>
-      <span className="text-lg font-semibold text-white" style={{ fontFamily: "var(--font-heading)" }}>
-        Your Agency
-      </span>
-    </div>
-  );
-
   return (
     <>
       <motion.nav

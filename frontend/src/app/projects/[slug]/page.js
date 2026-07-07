@@ -70,6 +70,57 @@ export default async function ProjectPage({ params }) {
               <h2 className="text-3xl text-white mb-6" style={{ fontFamily: "var(--font-heading)" }}>The Result</h2>
               <p className="text-[var(--muted)] text-lg leading-relaxed">{study.result}</p>
             </section>
+
+            {/* Detailed Content Sections */}
+            {study.details && study.details.map((section, idx) => (
+              <section key={idx} className="mt-12 pt-12 border-t border-[var(--hair)]">
+                <h2 className="text-3xl text-white mb-6" style={{ fontFamily: "var(--font-heading)" }}>{section.title}</h2>
+                {section.content && (
+                  <p className="text-[var(--muted)] text-lg leading-relaxed mb-8">{section.content}</p>
+                )}
+                
+                {/* Regular Items List */}
+                {section.items && (
+                  <ul className="space-y-4">
+                    {section.items.map((item, i) => (
+                      <li key={i} className="text-[var(--muted)] text-lg leading-relaxed flex items-start">
+                        <span className="text-[var(--lime)] mr-3 mt-1">✦</span>
+                        <div>
+                          <strong className="text-white font-medium">{item.label}</strong>
+                          {item.desc ? `: ${item.desc}` : ""}
+                        </div>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+                
+                {/* Subsections (like roles or frontend/backend) */}
+                {section.subsections && (
+                  <div className="space-y-10 mt-8">
+                    {section.subsections.map((sub, i) => (
+                      <div key={i} className="bg-[var(--card)] border border-[var(--hair)] p-6 rounded-lg">
+                        <h3 className="text-xl text-white mb-3" style={{ fontFamily: "var(--font-heading)" }}>{sub.title}</h3>
+                        {sub.desc && <p className="text-[var(--muted)] mb-6">{sub.desc}</p>}
+                        
+                        {sub.items && (
+                          <ul className="space-y-4">
+                            {sub.items.map((subItem, j) => (
+                              <li key={j} className="text-[var(--muted)] text-[15px] leading-relaxed flex items-start">
+                                <span className="text-[var(--violet)] mr-3 mt-1">▹</span>
+                                <div>
+                                  <strong className="text-gray-200">{subItem.label}</strong>
+                                  {subItem.desc ? `: ${subItem.desc}` : ""}
+                                </div>
+                              </li>
+                            ))}
+                          </ul>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </section>
+            ))}
           </div>
 
           {/* Sidebar / Metrics */}
