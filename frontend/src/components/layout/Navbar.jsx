@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { HiOutlineBars3, HiXMark } from "react-icons/hi2";
+import Link from "next/link";
 import { SITE_CONFIG, CASE_STUDIES } from "@/lib/constants";
 
 const NAV_LINKS = [
@@ -72,10 +73,10 @@ export default function Navbar() {
                   {/* Dropdown Menu */}
                   <div className="absolute top-[60px] left-[-20px] min-w-[220px] bg-[var(--panel)] border border-[var(--hair)] rounded-xl overflow-hidden opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 flex flex-col translate-y-2 group-hover:translate-y-0 shadow-2xl">
                     {CASE_STUDIES.map(study => (
-                      <a key={study.slug} href={study.link} target="_blank" rel="noopener noreferrer" className="px-5 py-3.5 hover:bg-[#202025] text-[var(--muted)] hover:text-[var(--lime)] border-b border-[var(--hair)] last:border-0 transition-colors text-[13px] font-medium flex items-center justify-between">
+                      <Link key={study.slug} href={`/projects/${study.slug}`} className="px-5 py-3.5 hover:bg-[#202025] text-[var(--muted)] hover:text-[var(--lime)] border-b border-[var(--hair)] last:border-0 transition-colors text-[13px] font-medium flex items-center justify-between">
                         {study.title}
                         <span className="opacity-0 group-hover:opacity-100 transition-opacity">↗</span>
-                      </a>
+                      </Link>
                     ))}
                   </div>
                 </div>
@@ -135,9 +136,9 @@ export default function Navbar() {
                     <span className="text-xl font-medium text-white mb-3" style={{ fontFamily: "var(--font-heading)" }}>{link.label}</span>
                     <div className="flex flex-col pl-4 gap-3">
                       {CASE_STUDIES.map(study => (
-                        <a key={study.slug} href={study.link} target="_blank" rel="noopener noreferrer" className="text-[var(--muted)] hover:text-[var(--lime)] text-[15px] flex items-center justify-between pr-4">
+                        <Link key={study.slug} href={`/projects/${study.slug}`} onClick={() => setMobileOpen(false)} className="text-[var(--muted)] hover:text-[var(--lime)] text-[15px] flex items-center justify-between pr-4">
                           {study.title} <span>↗</span>
-                        </a>
+                        </Link>
                       ))}
                     </div>
                   </div>
