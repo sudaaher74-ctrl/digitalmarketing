@@ -211,7 +211,7 @@ export const TEAM_MEMBERS = [
     bio: "Passionate about building scalable digital solutions and strategizing project roadmaps to deliver exceptional results."
   },
   {
-    name: "Sidhi Deshmukh",
+    name: "Siddhi Deshmukh",
     role: "Co-Founder",
     initials: "SD",
     color: "var(--violet)",
