@@ -9,7 +9,7 @@ import { SITE_CONFIG, CASE_STUDIES } from "@/lib/constants";
 const NAV_LINKS = [
   { label: "About", href: "/about" },
   { label: "Services", href: "/#services" },
-  { label: "Projects", isDropdown: true },
+  { label: "Projects", isDropdown: true, href: "/projects" },
   { label: "Process", href: "/#process" },
   { label: "FAQ", href: "/#faq" },
 ];
@@ -68,17 +68,21 @@ export default function Navbar() {
             {NAV_LINKS.map((link) => (
               link.isDropdown ? (
                 <div key={link.label} className="relative group">
-                  <button className="text-sm font-medium text-[var(--muted)] group-hover:text-white transition-colors py-6 flex items-center gap-1.5 cursor-pointer">
+                  <Link href={link.href} className="text-sm font-medium text-[var(--muted)] group-hover:text-white transition-colors py-6 flex items-center gap-1.5 cursor-pointer">
                     {link.label} <span className="text-[9px] opacity-60">▼</span>
-                  </button>
+                  </Link>
                   {/* Dropdown Menu */}
                   <div className="absolute top-[60px] left-[-20px] min-w-[220px] bg-[var(--panel)] border border-[var(--hair)] rounded-xl overflow-hidden opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 flex flex-col translate-y-2 group-hover:translate-y-0 shadow-2xl">
                     {CASE_STUDIES.map(study => (
-                      <Link key={study.slug} href={`/projects/${study.slug}`} className="px-5 py-3.5 hover:bg-[#202025] text-[var(--muted)] hover:text-[var(--lime)] border-b border-[var(--hair)] last:border-0 transition-colors text-[13px] font-medium flex items-center justify-between">
+                      <Link key={study.slug} href={`/projects/${study.slug}`} className="px-5 py-3.5 hover:bg-[#202025] text-[var(--muted)] hover:text-[var(--lime)] border-b border-[var(--hair)] transition-colors text-[13px] font-medium flex items-center justify-between">
                         {study.title}
                         <span className="opacity-0 group-hover:opacity-100 transition-opacity">↗</span>
                       </Link>
                     ))}
+                    <Link href="/projects" className="px-5 py-3.5 hover:bg-[#202025] text-[var(--muted)] hover:text-white transition-colors text-[13px] font-medium flex items-center justify-between">
+                      View All Projects
+                      <span className="opacity-0 group-hover:opacity-100 transition-opacity">→</span>
+                    </Link>
                   </div>
                 </div>
               ) : (
@@ -134,13 +138,16 @@ export default function Navbar() {
               {NAV_LINKS.map((link) => (
                 link.isDropdown ? (
                   <div key={link.label} className="border-b border-[var(--hair)] flex flex-col py-3">
-                    <span className="text-xl font-medium text-white mb-3" style={{ fontFamily: "var(--font-heading)" }}>{link.label}</span>
+                    <Link href={link.href} onClick={() => setMobileOpen(false)} className="text-xl font-medium text-white mb-3" style={{ fontFamily: "var(--font-heading)" }}>{link.label}</Link>
                     <div className="flex flex-col pl-4 gap-3">
                       {CASE_STUDIES.map(study => (
                         <Link key={study.slug} href={`/projects/${study.slug}`} onClick={() => setMobileOpen(false)} className="text-[var(--muted)] hover:text-[var(--lime)] text-[15px] flex items-center justify-between pr-4">
                           {study.title} <span>↗</span>
                         </Link>
                       ))}
+                      <Link href="/projects" onClick={() => setMobileOpen(false)} className="text-[var(--muted)] hover:text-white text-[15px] flex items-center justify-between pr-4 mt-2">
+                        View All Projects <span>→</span>
+                      </Link>
                     </div>
                   </div>
                 ) : (

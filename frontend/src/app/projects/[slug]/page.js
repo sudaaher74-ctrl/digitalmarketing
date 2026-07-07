@@ -9,8 +9,9 @@ export function generateStaticParams() {
   }));
 }
 
-export function generateMetadata({ params }) {
-  const study = CASE_STUDIES.find((s) => s.slug === params.slug);
+export async function generateMetadata({ params }) {
+  const { slug } = await params;
+  const study = CASE_STUDIES.find((s) => s.slug === slug);
   if (!study) return { title: "Not Found" };
   
   return {
@@ -19,8 +20,9 @@ export function generateMetadata({ params }) {
   };
 }
 
-export default function ProjectPage({ params }) {
-  const study = CASE_STUDIES.find((s) => s.slug === params.slug);
+export default async function ProjectPage({ params }) {
+  const { slug } = await params;
+  const study = CASE_STUDIES.find((s) => s.slug === slug);
   
   if (!study) {
     notFound();
