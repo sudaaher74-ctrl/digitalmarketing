@@ -46,7 +46,7 @@ html {
 }
 
 body {
-  background: var(--canvas);
+  background: transparent;
   color: var(--text);
   font-family: var(--font-body);
   line-height: 1.6;
@@ -80,7 +80,7 @@ h1, h2, h3, h4, .display {
 
 .section { padding: 100px 0; position: relative; }
 .section-dark {
-  background: var(--panel);
+  background: transparent;
   border-top: 1px solid var(--hair);
   border-bottom: 1px solid var(--hair);
 }

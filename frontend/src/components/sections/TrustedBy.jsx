@@ -1,53 +1,56 @@
 "use client";
 
-import { CLIENTS } from "@/lib/constants";
+import { motion } from "framer-motion";
 
-// Map clients to their link, and keep some placeholder non-link items if desired,
-// though now we have 5 clients, they alone are good. We'll add the placeholders just in case.
-const clientItems = CLIENTS.map((c) => ({ name: c.name, link: c.link }));
-const placeholderItems = [
-  { name: "Frozen Exports", link: null },
-  { name: "Dairy Co.", link: null },
-  { name: "Design Studio", link: null },
+const BRANDS = [
+  { name: "BrandKettle", color: "#FF3366" },
+  { name: "OS Interior", color: "#00FFB2" },
+  { name: "MilquuFresh", color: "#6C63FF" },
+  { name: "Drona Archery", color: "#FF9900" },
 ];
 
 export default function TrustedBy() {
-  const items = [...clientItems, ...placeholderItems, ...clientItems, ...placeholderItems];
   return (
-    <section id="portfolio" className="py-8" style={{ borderTop: "1px solid var(--hair)", borderBottom: "1px solid var(--hair)" }}>
-      <div
-        className="text-center uppercase text-[var(--muted-2)] mb-6"
-        style={{ fontFamily: "var(--font-heading)", letterSpacing: "2px", fontSize: 12 }}
-      >
-        Trusted by growing brands
-      </div>
-      <div className="marquee">
-        <div className="mq-track">
-          {items.map((item, i) => {
-            const content = (
-              <span className="flex items-center gap-[42px]">
-                <span style={{ fontFamily: "var(--font-heading)", fontWeight: 600, fontSize: 30, color: "#4a4a52", letterSpacing: "-0.02em" }}>
-                  {item.name}
-                </span>
-                <span style={{ color: "var(--lime)", fontSize: 18 }}>✦</span>
-              </span>
-            );
+    <section id="trusted-by" className="py-24 lg:py-32 relative z-10">
+      <div className="container max-w-[1200px] mx-auto px-4 md:px-8">
+        <h2 
+          className="text-white mb-16 text-center md:text-left"
+          style={{ 
+            fontFamily: "var(--font-heading)", 
+            fontSize: "clamp(36px, 5vw, 64px)",
+            fontWeight: 800,
+            letterSpacing: "-0.03em",
+            textShadow: "0 4px 20px rgba(0,0,0,0.5)"
+          }}
+        >
+          Trusted by marketing teams at
+        </h2>
 
-            return item.link ? (
-              <a 
-                key={i} 
-                href={item.link} 
-                target="_blank" 
-                rel="noopener noreferrer" 
-                className="hover:opacity-80 transition-opacity cursor-pointer"
-                style={{ textDecoration: "none" }}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-5 max-w-5xl mx-auto">
+          {BRANDS.map((brand, i) => (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ duration: 0.5, delay: Math.min(i * 0.05, 0.5) }}
+              whileHover={{ y: -5, scale: 1.02 }}
+              className="bg-white rounded-2xl md:rounded-[24px] aspect-square flex items-center justify-center p-6 cursor-pointer hover:shadow-[0_10px_30px_rgba(255,255,255,0.15)] transition-all duration-300"
+            >
+              {/* Placeholder for client logos. Users can swap this for <img src="..." /> */}
+              <div 
+                className="text-center font-bold tracking-tighter"
+                style={{ 
+                  color: brand.color, 
+                  fontFamily: "var(--font-heading)",
+                  fontSize: "clamp(18px, 1.8vw, 22px)",
+                  lineHeight: 1.1
+                }}
               >
-                {content}
-              </a>
-            ) : (
-              <span key={i}>{content}</span>
-            );
-          })}
+                {brand.name}
+              </div>
+            </motion.div>
+          ))}
         </div>
       </div>
     </section>
