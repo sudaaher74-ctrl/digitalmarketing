@@ -24,28 +24,42 @@ export default function Services() {
           lede="A full-stack marketing team — from the site your customers land on to the campaigns that get them there."
         />
 
-        <div className="hair-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
-          {SERVICES.map((service, i) => (
-            <motion.div
-              key={service.title}
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.15 }}
-              transition={{ duration: 0.5, delay: (i % 3) * 0.08 }}
-              className="cell group px-9 py-10 min-h-[220px] transition-colors duration-300 hover:!bg-[var(--card)]"
-            >
-              <span
-                className="block mb-12"
-                style={{ fontFamily: "var(--font-heading)", color: "var(--lime)", fontSize: 26 }}
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-4 md:gap-5 auto-rows-[280px]">
+          {SERVICES.map((service, i) => {
+            // Bento Box layout spanning logic
+            const isLarge = i === 0 || i === 3; // First and fourth cards are larger
+            const spanClass = isLarge ? "md:col-span-2 md:row-span-1" : "md:col-span-1 md:row-span-1";
+            
+            return (
+              <motion.div
+                key={service.title}
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.15 }}
+                transition={{ duration: 0.5, delay: i * 0.08 }}
+                className={`glass-card group flex flex-col justify-between p-8 rounded-3xl ${spanClass}`}
               >
-                {glyphMap[service.icon]}
-              </span>
-              <h3 className="text-white mb-3" style={{ fontFamily: "var(--font-heading)", fontSize: 22 }}>
-                {service.title}
-              </h3>
-              <p className="text-[var(--muted)] text-[15px]">{service.description}</p>
-            </motion.div>
-          ))}
+                <div className="flex justify-between items-start">
+                  <span
+                    className="block"
+                    style={{ fontFamily: "var(--font-heading)", color: "var(--lime)", fontSize: 26 }}
+                  >
+                    {glyphMap[service.icon]}
+                  </span>
+                  <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <span className="text-white text-xl">↗</span>
+                  </div>
+                </div>
+                
+                <div>
+                  <h3 className="text-white mb-2" style={{ fontFamily: "var(--font-heading)", fontSize: isLarge ? 28 : 22 }}>
+                    {service.title}
+                  </h3>
+                  <p className="text-[var(--muted)] text-[15px] leading-relaxed max-w-sm">{service.description}</p>
+                </div>
+              </motion.div>
+            );
+          })}
         </div>
       </div>
     </section>

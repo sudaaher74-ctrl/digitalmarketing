@@ -1,6 +1,7 @@
 import { Space_Grotesk, Instrument_Sans } from "next/font/google";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
+import CustomCursor from "@/components/ui/CustomCursor";
 import "./globals.css";
 
 const instrumentSans = Instrument_Sans({
@@ -97,15 +98,14 @@ export default function RootLayout({ children }) {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
-      <body
-        className="min-h-screen antialiased"
-        style={{
-          fontFamily: "var(--font-body)",
-        }}
-      >
-        <Navbar />
-        <main>{children}</main>
-        <Footer />
+      <body className="antialiased font-sans bg-[var(--canvas)] text-[var(--text)]">
+        <CustomCursor>
+          <Navbar />
+          <main className="min-h-screen">
+            {children}
+          </main>
+          <Footer />
+        </CustomCursor>
       </body>
     </html>
   );

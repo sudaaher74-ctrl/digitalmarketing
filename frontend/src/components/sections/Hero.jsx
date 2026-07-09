@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import AnimatedCounter from "@/components/ui/AnimatedCounter";
 import GalaxyBackground from "@/components/ui/GalaxyBackground";
+import Magnetic from "@/components/ui/Magnetic";
 import { STATS } from "@/lib/constants";
 
 const bars = [34, 48, 42, 64, 56, 88, 100];
@@ -53,8 +54,12 @@ export default function Hero() {
             </p>
 
             <div className="flex flex-wrap gap-4">
-              <a href="#contact" className="btn-glass">Get Free Consultation →</a>
-              <a href="#case-studies" className="btn-glass-outline">View Our Work</a>
+              <Magnetic>
+                <a href="#contact" className="btn-glass">Get Free Consultation →</a>
+              </Magnetic>
+              <Magnetic>
+                <a href="#case-studies" className="btn-glass-outline">View Our Work</a>
+              </Magnetic>
             </div>
             
             <style jsx>{`
