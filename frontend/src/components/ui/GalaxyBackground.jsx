@@ -1,284 +1,231 @@
 "use client";
 import { useEffect, useRef } from "react";
+import * as THREE from "three";
 
 export default function GalaxyBackground() {
-  const canvasRef = useRef(null);
+  const mountRef = useRef(null);
 
   useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-    const ctx = canvas.getContext("2d", { alpha: false });
+    if (!mountRef.current) return;
 
-    let animationFrameId;
     let width = window.innerWidth;
     let height = window.innerHeight;
+
+    // 1. Setup Scene, Camera, Renderer
+    const scene = new THREE.Scene();
+    scene.background = new THREE.Color("#02020A");
     
-    // Parallax mouse target
+    // Add subtle fog to blend the deep tunnel
+    scene.fog = new THREE.FogExp2("#02020A", 0.0003);
+
+    const camera = new THREE.PerspectiveCamera(60, width / height, 1, 5000);
+    camera.position.z = 400;
+
+    const renderer = new THREE.WebGLRenderer({ antialias: false, alpha: false });
+    renderer.setSize(width, height);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    mountRef.current.appendChild(renderer.domElement);
+
+    // Responsive limits
+    const isMobile = width < 768;
+    
+    // 2. Deep Space Stars (System 1)
+    const deepSpaceCount = isMobile ? 3000 : 25000;
+    const deepSpaceGeo = new THREE.BufferGeometry();
+    const deepSpacePos = new Float32Array(deepSpaceCount * 3);
+    const deepSpaceColors = new Float32Array(deepSpaceCount * 3);
+    
+    const color1 = new THREE.Color("#7A38EB");
+    const color2 = new THREE.Color("#543D98");
+    
+    for(let i=0; i<deepSpaceCount; i++) {
+      deepSpacePos[i*3] = (Math.random() - 0.5) * 4000;
+      deepSpacePos[i*3+1] = (Math.random() - 0.5) * 4000;
+      deepSpacePos[i*3+2] = (Math.random() - 0.5) * 4000 - 1000;
+      
+      const mixedColor = color1.clone().lerp(color2, Math.random());
+      deepSpaceColors[i*3] = mixedColor.r;
+      deepSpaceColors[i*3+1] = mixedColor.g;
+      deepSpaceColors[i*3+2] = mixedColor.b;
+    }
+    deepSpaceGeo.setAttribute('position', new THREE.BufferAttribute(deepSpacePos, 3));
+    deepSpaceGeo.setAttribute('color', new THREE.BufferAttribute(deepSpaceColors, 3));
+    
+    const deepSpaceMat = new THREE.PointsMaterial({
+      size: 1.5,
+      vertexColors: true,
+      sizeAttenuation: false,
+      transparent: true,
+      opacity: 0.8
+    });
+    const deepSpace = new THREE.Points(deepSpaceGeo, deepSpaceMat);
+    scene.add(deepSpace);
+
+    // Helper to generate a glowing circle texture for foreground stars
+    const getCircleTexture = () => {
+      const canvas = document.createElement('canvas');
+      canvas.width = 32;
+      canvas.height = 32;
+      const ctx = canvas.getContext('2d');
+      
+      const gradient = ctx.createRadialGradient(16, 16, 0, 16, 16, 16);
+      gradient.addColorStop(0, 'rgba(255,255,255,1)');
+      gradient.addColorStop(0.2, 'rgba(255,255,255,0.8)');
+      gradient.addColorStop(1, 'rgba(255,255,255,0)');
+      
+      ctx.fillStyle = gradient;
+      ctx.beginPath();
+      ctx.arc(16, 16, 16, 0, Math.PI * 2);
+      ctx.fill();
+      
+      const texture = new THREE.CanvasTexture(canvas);
+      return texture;
+    };
+
+    // 3. Foreground Flow / Sphere (System 2)
+    const fgCount = isMobile ? 800 : 3000;
+    const fgGeo = new THREE.BufferGeometry();
+    const fgPos = new Float32Array(fgCount * 3);
+    
+    for(let i=0; i<fgCount; i++) {
+      // Spherical distribution
+      const r = Math.random() * 120 + 50; // Inner radius 50, outer 170
+      const theta = 2 * Math.PI * Math.random();
+      const phi = Math.acos(2 * Math.random() - 1);
+      
+      fgPos[i*3] = r * Math.sin(phi) * Math.cos(theta);
+      fgPos[i*3+1] = r * Math.sin(phi) * Math.sin(theta);
+      fgPos[i*3+2] = r * Math.cos(phi);
+    }
+    fgGeo.setAttribute('position', new THREE.BufferAttribute(fgPos, 3));
+    
+    const fgMat = new THREE.PointsMaterial({
+      size: 2.5,
+      color: "#F5F5F7",
+      map: getCircleTexture(),
+      transparent: true,
+      opacity: 0.9,
+      sizeAttenuation: true,
+      blending: THREE.AdditiveBlending,
+      depthWrite: false
+    });
+    const foreground = new THREE.Points(fgGeo, fgMat);
+    scene.add(foreground);
+
+    // 4. Warp Tunnel (System 3)
+    const tunnelCount = isMobile ? 200 : 880;
+    const tunnelGeo = new THREE.BufferGeometry();
+    const tunnelPos = new Float32Array(tunnelCount * 3);
+    
+    for(let i=0; i<tunnelCount; i++) {
+      const angle = Math.random() * Math.PI * 2;
+      const radius = Math.random() * 300 + 100;
+      tunnelPos[i*3] = Math.cos(angle) * radius;
+      tunnelPos[i*3+1] = Math.sin(angle) * radius;
+      tunnelPos[i*3+2] = (Math.random() - 1.0) * 3000; // Z from 0 to -3000
+    }
+    tunnelGeo.setAttribute('position', new THREE.BufferAttribute(tunnelPos, 3));
+    
+    const tunnelMat = new THREE.PointsMaterial({
+      size: 2.0,
+      color: "#7C3AED",
+      sizeAttenuation: false,
+      transparent: true,
+      opacity: 0.7
+    });
+    const tunnel = new THREE.Points(tunnelGeo, tunnelMat);
+    scene.add(tunnel);
+
+    // 5. Parallax & Scroll setup
     let mouseX = 0;
     let mouseY = 0;
     let targetX = 0;
     let targetY = 0;
-
-    const handleMouseMove = (e) => {
-      // Normalized coordinates: -1 to 1
-      mouseX = (e.clientX / width) * 2 - 1;
-      mouseY = (e.clientY / height) * 2 - 1;
-    };
-
-    window.addEventListener('mousemove', handleMouseMove, { passive: true });
-
-    // Responsive Star count
-    const getStarCount = () => {
-      if (width < 768) return 450;
-      if (width < 1024) return 900;
-      return 1800;
-    };
-
-    let stars = [];
-    let glowParticles = [];
-    let shootingStars = [];
     
-    const starColors = ["#FFFFFF", "#EDEBFF", "#DCD5FF", "#BCAEFF"];
-
-    const init = () => {
-      canvas.width = width;
-      canvas.height = height;
-
-      // Init Stars
-      stars = [];
-      const numStars = getStarCount();
-      for (let i = 0; i < numStars; i++) {
-        // Assign to 3 layers
-        const layer = Math.random();
-        let parallaxFactor = 1;
-        let sizeRange = [0.5, 1];
-        if (layer > 0.8) {
-          parallaxFactor = 6; // Large stars
-          sizeRange = [1.5, 2.5];
-        } else if (layer > 0.4) {
-          parallaxFactor = 3; // Medium stars
-          sizeRange = [1, 1.5];
-        } else {
-          parallaxFactor = 1; // Tiny stars
-          sizeRange = [0.5, 1];
-        }
-
-        stars.push({
-          x: Math.random() * width,
-          y: Math.random() * height,
-          size: Math.random() * (sizeRange[1] - sizeRange[0]) + sizeRange[0],
-          color: starColors[Math.floor(Math.random() * starColors.length)],
-          baseAlpha: Math.random() * 0.6 + 0.2,
-          alpha: Math.random() * 0.6 + 0.2,
-          twinkleSpeed: Math.random() * 0.005 + 0.002,
-          twinkleDir: Math.random() > 0.5 ? 1 : -1,
-          parallax: parallaxFactor,
-        });
-      }
-
-      // Init Glow Particles
-      glowParticles = [];
-      const numParticles = width < 768 ? 15 : Math.floor(Math.random() * 15 + 25); // 25-40
-      for (let i = 0; i < numParticles; i++) {
-        glowParticles.push({
-          x: Math.random() * width,
-          y: Math.random() * height,
-          size: Math.random() * 22 + 8, // 8px to 30px
-          vx: (Math.random() - 0.5) * 0.1,
-          vy: (Math.random() - 0.5) * 0.1,
-          alpha: Math.random() * 0.17 + 0.08, // 0.08 - 0.25
-          parallax: 12,
-        });
-      }
+    const onMouseMove = (event) => {
+      mouseX = (event.clientX - width / 2);
+      mouseY = (event.clientY - height / 2);
     };
+    window.addEventListener("mousemove", onMouseMove, { passive: true });
 
-    // Resize handler
-    const handleResize = () => {
+    let scrollY = 0;
+    const onScroll = () => {
+      scrollY = window.scrollY;
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+
+    const onResize = () => {
       width = window.innerWidth;
       height = window.innerHeight;
-      init();
+      camera.aspect = width / height;
+      camera.updateProjectionMatrix();
+      renderer.setSize(width, height);
     };
-    window.addEventListener('resize', handleResize, { passive: true });
+    window.addEventListener("resize", onResize, { passive: true });
 
-    // Shooting Star logic
-    let nextShootingStarTime = Date.now() + Math.random() * 12000 + 8000;
-
-    const spawnShootingStar = () => {
-      const angle = Math.random() * Math.PI * 2; // Random direction
-      const speed = Math.random() * 10 + 15;
-      
-      shootingStars.push({
-        x: Math.random() * width,
-        y: Math.random() * height,
-        vx: Math.cos(angle) * speed,
-        vy: Math.sin(angle) * speed,
-        life: 1,
-        decay: Math.random() * 0.015 + 0.01,
-      });
-      nextShootingStarTime = Date.now() + Math.random() * 12000 + 8000;
-    };
-
-    const drawBackground = () => {
-      const gradient = ctx.createRadialGradient(
-        width / 2, height / 3, 0,
-        width / 2, height / 3, Math.max(width, height) * 0.8
-      );
-      gradient.addColorStop(0, "#18113F"); // Top/Center
-      gradient.addColorStop(0.5, "#09051F"); // Middle
-      gradient.addColorStop(1, "#02020A"); // Bottom/Edges
-      
-      ctx.fillStyle = gradient;
-      ctx.fillRect(0, 0, width, height);
-    };
-
-    const drawNebula = (offsetX, offsetY) => {
-      // Nebula: Layer 5, 20px parallax
-      const nebulaX = width / 2 + offsetX * 20;
-      const nebulaY = height / 3 + offsetY * 20;
-      
-      const gradient = ctx.createRadialGradient(
-        nebulaX, nebulaY, 0,
-        nebulaX, nebulaY, width * 0.4
-      );
-      gradient.addColorStop(0, "rgba(111, 69, 255, 0.12)"); // #6F45FF
-      gradient.addColorStop(0.5, "rgba(138, 107, 255, 0.05)"); // #8A6BFF
-      gradient.addColorStop(1, "rgba(77, 43, 255, 0)"); // #4D2BFF
-      
-      ctx.fillStyle = gradient;
-      ctx.fillRect(0, 0, width, height);
-    };
+    // 6. Animation Loop
+    let reqId;
+    const clock = new THREE.Clock();
 
     const animate = () => {
-      if (document.hidden) {
-        animationFrameId = requestAnimationFrame(animate);
-        return; // Pause animation if tab is hidden
-      }
+      reqId = requestAnimationFrame(animate);
       
-      // Smooth mouse follow
-      targetX += (mouseX - targetX) * 0.05;
-      targetY += (mouseY - targetY) * 0.05;
+      const time = clock.getElapsedTime();
+
+      // Ambient Rotations
+      deepSpace.rotation.y = time * 0.01;
+      deepSpace.rotation.x = time * 0.005;
       
-      // 1. Background
-      drawBackground();
+      foreground.rotation.y = time * 0.03;
+      foreground.rotation.z = time * 0.01;
       
-      // 2. Nebula Glow
-      drawNebula(targetX, targetY);
+      tunnel.rotation.z = time * 0.02;
 
-      // 3. Stars
-      stars.forEach(star => {
-        // Twinkle
-        star.alpha += star.twinkleSpeed * star.twinkleDir;
-        if (star.alpha >= star.baseAlpha + 0.3 || star.alpha >= 1) star.twinkleDir = -1;
-        if (star.alpha <= star.baseAlpha - 0.3 || star.alpha <= 0.1) star.twinkleDir = 1;
+      // Mouse Parallax (smooth)
+      targetX = mouseX * 0.05;
+      targetY = mouseY * 0.05;
+      
+      camera.position.x += (targetX - camera.position.x) * 0.02;
+      camera.position.y += (-targetY - camera.position.y) * 0.02;
+      
+      // Scroll Parallax (Camera moves forward through tunnel)
+      // Base Z is 400. As scrollY increases, Z decreases (moving forward)
+      const targetZ = 400 - (scrollY * 0.2); 
+      camera.position.z += (targetZ - camera.position.z) * 0.05;
 
-        const x = star.x - targetX * star.parallax;
-        const y = star.y - targetY * star.parallax;
-
-        // Wrap around smoothly
-        let wrappedX = (x % width + width) % width;
-        let wrappedY = (y % height + height) % height;
-
-        ctx.beginPath();
-        ctx.arc(wrappedX, wrappedY, star.size, 0, Math.PI * 2);
-        ctx.fillStyle = star.color;
-        ctx.globalAlpha = Math.max(0, Math.min(1, star.alpha));
-        ctx.fill();
-        ctx.globalAlpha = 1;
-      });
-
-      // 4. Glow Particles
-      glowParticles.forEach(p => {
-        p.x += p.vx;
-        p.y += p.vy;
-
-        // Wrap
-        if (p.x < -100) p.x = width + 100;
-        if (p.x > width + 100) p.x = -100;
-        if (p.y < -100) p.y = height + 100;
-        if (p.y > height + 100) p.y = -100;
-
-        const px = p.x - targetX * p.parallax;
-        const py = p.y - targetY * p.parallax;
-
-        ctx.beginPath();
-        ctx.arc(px, py, p.size, 0, Math.PI * 2);
-        const grad = ctx.createRadialGradient(px, py, 0, px, py, p.size);
-        grad.addColorStop(0, `rgba(255, 255, 255, ${p.alpha})`);
-        grad.addColorStop(1, `rgba(255, 255, 255, 0)`);
-        
-        ctx.fillStyle = grad;
-        ctx.fill();
-      });
-
-      // 5. Shooting stars
-      if (Date.now() > nextShootingStarTime) {
-        spawnShootingStar();
-      }
-
-      for (let i = shootingStars.length - 1; i >= 0; i--) {
-        const ss = shootingStars[i];
-        ss.x += ss.vx;
-        ss.y += ss.vy;
-        ss.life -= ss.decay;
-
-        if (ss.life <= 0) {
-          shootingStars.splice(i, 1);
-          continue;
-        }
-
-        ctx.beginPath();
-        ctx.moveTo(ss.x, ss.y);
-        ctx.lineTo(ss.x - ss.vx * 8, ss.y - ss.vy * 8); // Motion blur trail
-        
-        const grad = ctx.createLinearGradient(ss.x, ss.y, ss.x - ss.vx * 8, ss.y - ss.vy * 8);
-        grad.addColorStop(0, `rgba(255, 255, 255, ${ss.life})`);
-        grad.addColorStop(1, `rgba(255, 255, 255, 0)`);
-        
-        ctx.strokeStyle = grad;
-        ctx.lineWidth = 1.5;
-        ctx.lineCap = "round";
-        ctx.stroke();
-      }
-
-      animationFrameId = requestAnimationFrame(animate);
+      renderer.render(scene, camera);
     };
 
-    init();
     animate();
 
     return () => {
-      window.removeEventListener('resize', handleResize);
-      window.removeEventListener('mousemove', handleMouseMove);
-      cancelAnimationFrame(animationFrameId);
+      cancelAnimationFrame(reqId);
+      window.removeEventListener("mousemove", onMouseMove);
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onResize);
+      if (mountRef.current) mountRef.current.removeChild(renderer.domElement);
+      // Cleanup Three.js
+      deepSpaceGeo.dispose();
+      deepSpaceMat.dispose();
+      fgGeo.dispose();
+      fgMat.dispose();
+      tunnelGeo.dispose();
+      tunnelMat.dispose();
+      renderer.dispose();
     };
   }, []);
 
   return (
-    <div className="absolute inset-0 w-full h-full z-0 overflow-hidden pointer-events-none bg-[#02020A]">
-      {/* Canvas */}
-      <canvas
-        ref={canvasRef}
-        className="absolute inset-0 block w-full h-full breathing-canvas"
-      />
-      {/* Noise Overlay */}
+    <div className="fixed inset-0 w-full h-full z-[-1] pointer-events-none bg-[#02020A]">
+      <div ref={mountRef} className="absolute inset-0 w-full h-full" />
+      {/* Soft gradient overlay matching Impulse Digital */}
       <div 
-        className="absolute inset-0 w-full h-full mix-blend-overlay opacity-[0.03] pointer-events-none"
+        className="absolute inset-0 w-full h-full" 
         style={{
-          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`
+          background: "radial-gradient(circle at center, transparent 0%, #02020A 100%)",
+          opacity: 0.8
         }}
       />
-
-      <style>{`
-        @keyframes breathe {
-          0% { transform: scale(1); }
-          50% { transform: scale(1.01); }
-          100% { transform: scale(1); }
-        }
-        .breathing-canvas {
-          animation: breathe 18s ease-in-out infinite;
-          transform-origin: center center;
-        }
-      `}</style>
     </div>
   );
 }
