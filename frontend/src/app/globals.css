@@ -190,11 +190,6 @@ select.form-input option { background: var(--panel); color: var(--text); }
 
 /* ===== PREMIUM UI STYLES ===== */
 
-/* Custom Cursor Hide */
-.custom-cursor-active * {
-  cursor: none !important;
-}
-
 /* Glass Card */
 .glass-card {
   position: relative;
