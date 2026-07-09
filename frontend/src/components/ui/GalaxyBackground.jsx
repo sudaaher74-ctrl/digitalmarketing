@@ -101,7 +101,7 @@ export default function GalaxyBackground() {
     
     const fgMat = new THREE.PointsMaterial({
       size: 2.5,
-      color: "#F5F5F7",
+      color: "#7C3AED",
       map: getCircleTexture(),
       transparent: true,
       opacity: 0.9,
