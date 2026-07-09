@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import AnimatedCounter from "@/components/ui/AnimatedCounter";
+import GalaxyBackground from "@/components/ui/GalaxyBackground";
 import { STATS } from "@/lib/constants";
 
 const bars = [34, 48, 42, 64, 56, 88, 100];
@@ -14,7 +15,8 @@ const progs = [
 export default function Hero() {
   return (
     <section id="hero" className="relative overflow-hidden">
-      <div className="container pt-[110px] pb-[70px]">
+      <GalaxyBackground />
+      <div className="container pt-[110px] pb-[70px] relative z-10">
         <div className="grid lg:grid-cols-[1.05fr_0.95fr] gap-14 lg:gap-16 items-center">
           {/* Left */}
           <motion.div
@@ -30,20 +32,78 @@ export default function Hero() {
               Digital Marketing Agency
             </span>
 
-            <h1 className="text-white mb-5" style={{ fontFamily: "var(--font-heading)", fontSize: "clamp(44px, 6.4vw, 84px)" }}>
+            <h1 
+              className="text-white mb-5 font-black" 
+              style={{ 
+                fontFamily: "var(--font-heading)", 
+                fontSize: "clamp(44px, 6.4vw, 84px)",
+                textShadow: "0 8px 35px rgba(0,0,0,0.45)"
+              }}
+            >
               Growth for brands that refuse to{" "}
               <span style={{ color: "var(--lime)" }}>blend in.</span>
             </h1>
 
-            <p className="text-[var(--muted)] text-lg max-w-[480px] mb-7">
+            <p 
+              className="text-lg mb-7"
+              style={{ color: "rgba(255,255,255,0.78)", maxWidth: "850px" }}
+            >
               We build high converting websites and run marketing that generates leads,
               drives sales, and makes your brand impossible to ignore.
             </p>
 
-            <div className="flex flex-wrap gap-3.5">
-              <a href="#contact" className="btn-lime">Get Free Consultation →</a>
-              <a href="#case-studies" className="btn-outline">View Our Work</a>
+            <div className="flex flex-wrap gap-4">
+              <a href="#contact" className="btn-glass">Get Free Consultation →</a>
+              <a href="#case-studies" className="btn-glass-outline">View Our Work</a>
             </div>
+            
+            <style jsx>{`
+              .btn-glass {
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                gap: 8px;
+                padding: 15px 28px;
+                font-family: var(--font-heading);
+                font-weight: 600;
+                font-size: 15px;
+                color: #fff;
+                text-decoration: none;
+                background: rgba(100, 70, 255, 0.12);
+                border: 1px solid rgba(150, 130, 255, 0.35);
+                backdrop-filter: blur(20px);
+                -webkit-backdrop-filter: blur(20px);
+                box-shadow: 0 0 35px rgba(122, 88, 255, 0.45);
+                transition: all 0.35s ease;
+              }
+              .btn-glass:hover {
+                transform: translateY(-3px);
+                box-shadow: 0 0 45px rgba(122, 88, 255, 0.65);
+                background: rgba(100, 70, 255, 0.2);
+              }
+              .btn-glass-outline {
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                gap: 8px;
+                padding: 15px 28px;
+                font-family: var(--font-heading);
+                font-weight: 600;
+                font-size: 15px;
+                color: #fff;
+                text-decoration: none;
+                background: rgba(255, 255, 255, 0.05);
+                border: 1px solid rgba(255, 255, 255, 0.15);
+                backdrop-filter: blur(20px);
+                -webkit-backdrop-filter: blur(20px);
+                transition: all 0.35s ease;
+              }
+              .btn-glass-outline:hover {
+                transform: translateY(-3px);
+                background: rgba(255, 255, 255, 0.1);
+                border-color: rgba(255, 255, 255, 0.3);
+              }
+            `}</style>
           </motion.div>
 
           {/* Right: analytics card */}
