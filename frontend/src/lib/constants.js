@@ -68,7 +68,7 @@ export const CLIENTS = [
     services: ["Online Store", "Performance Marketing", "Social Media"],
     description: "An online store for premium archery equipment, designed for better conversions.",
     color: "#FF9900",
-    link: "https://dronaarchery.in"
+    link: "https://dronaarchery.com"
   },
 ];
 
@@ -458,7 +458,7 @@ export const CASE_STUDIES = [
     services: ["Online Store", "UX/UI Design", "Marketing"],
     metrics: [{ v: "+85%", l: "Conv." }, { v: "+300%", l: "Reach" }],
     color: "#FF9900",
-    link: "https://dronaarchery.in",
+    link: "https://dronaarchery.com",
     details: [
       {
         title: "🎯 Project Overview",
