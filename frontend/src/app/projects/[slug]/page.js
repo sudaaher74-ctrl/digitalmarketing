@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 import { CASE_STUDIES } from "@/lib/constants";
 import SectionHeading from "@/components/ui/SectionHeading";
+import GalaxyBackground from "@/components/ui/GalaxyBackground";
 
 // Generate static params for SSG
 export function generateStaticParams() {
@@ -29,8 +30,9 @@ export default async function ProjectPage({ params }) {
   }
 
   return (
-    <div className="pt-24 pb-20">
-      <div className="container">
+    <div className="pt-24 pb-20 relative overflow-hidden min-h-screen">
+      <GalaxyBackground />
+      <div className="container relative z-10">
         {/* Project Header */}
         <div className="mb-16 border-b border-[var(--hair)] pb-12">
           <div className="uppercase mb-4" style={{ fontFamily: "var(--font-heading)", letterSpacing: "1.5px", fontSize: 13, color: "var(--violet)", fontWeight: 600 }}>
