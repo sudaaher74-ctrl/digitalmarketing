@@ -1,9 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import AnimatedCounter from "@/components/ui/AnimatedCounter";
 import GalaxyBackground from "@/components/ui/GalaxyBackground";
-import { STATS } from "@/lib/constants";
 
 
 export default function Hero() {
@@ -19,13 +17,6 @@ export default function Hero() {
             transition={{ duration: 0.6 }}
             className="flex flex-col items-center text-center"
           >
-            <span
-              className="inline-flex items-center gap-2 border border-[var(--hair)] rounded-full px-4 py-2 mb-6 uppercase text-[var(--muted)]"
-              style={{ fontFamily: "var(--font-heading)", fontSize: 12, letterSpacing: "1.5px", fontWeight: 600 }}
-            >
-              <span className="w-2 h-2 rounded-full" style={{ background: "var(--lime)" }} />
-              Digital Marketing Agency
-            </span>
 
             <h1 
               className="text-white mb-5 font-black" 
@@ -104,20 +95,7 @@ export default function Hero() {
 
         </div>
 
-        {/* Stat row */}
-        <div
-          className="mt-[70px] grid grid-cols-2 md:grid-cols-4"
-          style={{ background: "var(--hair)", gap: 1, border: "1px solid var(--hair)" }}
-        >
-          {STATS.map((stat) => (
-            <div key={stat.label} className="px-7 py-9" style={{ background: "var(--canvas)" }}>
-              <div style={{ fontFamily: "var(--font-heading)", fontWeight: 700, fontSize: 44, color: "var(--lime)", letterSpacing: "-0.03em" }}>
-                <AnimatedCounter value={stat.value} suffix={stat.suffix} />
-              </div>
-              <div className="text-[var(--muted)] text-sm mt-1.5">{stat.label}</div>
-            </div>
-          ))}
-        </div>
+
       </div>
     </section>
   );
