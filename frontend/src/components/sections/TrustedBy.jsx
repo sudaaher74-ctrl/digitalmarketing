@@ -13,19 +13,6 @@ export default function TrustedBy() {
   return (
     <section id="trusted-by" className="py-24 lg:py-32 relative z-10">
       <div className="container max-w-[1200px] mx-auto px-4 md:px-8">
-        <h2 
-          className="text-white mb-16 text-center md:text-left"
-          style={{ 
-            fontFamily: "var(--font-heading)", 
-            fontSize: "clamp(36px, 5vw, 64px)",
-            fontWeight: 800,
-            letterSpacing: "-0.03em",
-            textShadow: "0 4px 20px rgba(0,0,0,0.5)"
-          }}
-        >
-          Trusted by marketing teams at
-        </h2>
-
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-5 max-w-5xl mx-auto">
           {BRANDS.map((brand, i) => (
             <motion.div
