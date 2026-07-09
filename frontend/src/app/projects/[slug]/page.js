@@ -56,20 +56,7 @@ export default async function ProjectPage({ params }) {
         {/* Project Content */}
         <div className="grid lg:grid-cols-[1fr_380px] gap-16">
           <div className="space-y-12">
-            <section>
-              <h2 className="text-3xl text-white mb-6" style={{ fontFamily: "var(--font-heading)" }}>The Challenge</h2>
-              <p className="text-[var(--muted)] text-lg leading-relaxed">{study.challenge}</p>
-            </section>
-            
-            <section>
-              <h2 className="text-3xl text-white mb-6" style={{ fontFamily: "var(--font-heading)" }}>Our Solution</h2>
-              <p className="text-[var(--muted)] text-lg leading-relaxed">{study.solution}</p>
-            </section>
-            
-            <section>
-              <h2 className="text-3xl text-white mb-6" style={{ fontFamily: "var(--font-heading)" }}>The Result</h2>
-              <p className="text-[var(--muted)] text-lg leading-relaxed">{study.result}</p>
-            </section>
+
 
             {/* Detailed Content Sections */}
             {study.details && study.details.map((section, idx) => (
