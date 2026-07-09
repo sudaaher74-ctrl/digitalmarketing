@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 const BRANDS = [
   { name: "BrandKettle", color: "#FF3366" },
   { name: "OS Interior", color: "#00FFB2" },
-  { name: "MilquuFresh", color: "#6C63FF" },
+  { name: "MilquuFresh", color: "#6C63FF", image: "/milquufresh.png" },
   { name: "Drona Archery", color: "#FF9900" },
 ];
 
@@ -37,18 +37,21 @@ export default function TrustedBy() {
               whileHover={{ y: -5, scale: 1.02 }}
               className="bg-white rounded-2xl md:rounded-[24px] aspect-square flex items-center justify-center p-6 cursor-pointer hover:shadow-[0_10px_30px_rgba(255,255,255,0.15)] transition-all duration-300"
             >
-              {/* Placeholder for client logos. Users can swap this for <img src="..." /> */}
-              <div 
-                className="text-center font-bold tracking-tighter"
-                style={{ 
-                  color: brand.color, 
-                  fontFamily: "var(--font-heading)",
-                  fontSize: "clamp(18px, 1.8vw, 22px)",
-                  lineHeight: 1.1
-                }}
-              >
-                {brand.name}
-              </div>
+              {brand.image ? (
+                <img src={brand.image} alt={brand.name} className="w-full h-full object-contain p-2" />
+              ) : (
+                <div 
+                  className="text-center font-bold tracking-tighter"
+                  style={{ 
+                    color: brand.color, 
+                    fontFamily: "var(--font-heading)",
+                    fontSize: "clamp(18px, 1.8vw, 22px)",
+                    lineHeight: 1.1
+                  }}
+                >
+                  {brand.name}
+                </div>
+              )}
             </motion.div>
           ))}
         </div>
