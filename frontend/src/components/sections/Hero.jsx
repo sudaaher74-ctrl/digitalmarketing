@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import AnimatedCounter from "@/components/ui/AnimatedCounter";
 import GalaxyBackground from "@/components/ui/GalaxyBackground";
 import Magnetic from "@/components/ui/Magnetic";
-import { STATS } from "@/lib/constants";
+import { STATS, SITE_CONFIG } from "@/lib/constants";
 
 const bars = [34, 48, 42, 64, 56, 88, 100];
 const progs = [
@@ -55,7 +55,7 @@ export default function Hero() {
 
             <div className="flex flex-wrap gap-4">
               <Magnetic>
-                <a href="#contact" className="btn-glass">Get Free Consultation →</a>
+                <a href={`https://wa.me/${SITE_CONFIG.whatsapp}`} target="_blank" rel="noopener noreferrer" className="btn-glass">Get in touch →</a>
               </Magnetic>
               <Magnetic>
                 <a href="#case-studies" className="btn-glass-outline">View Our Work</a>

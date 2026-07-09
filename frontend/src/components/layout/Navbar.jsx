@@ -94,9 +94,9 @@ export default function Navbar() {
                 </Link>
               )
             ))}
-            <Link href="/#contact" className="btn-lime !py-2.5 !px-5 !text-sm">
-              Get Free Consultation →
-            </Link>
+            <a href={`https://wa.me/${SITE_CONFIG.whatsapp}`} target="_blank" rel="noopener noreferrer" className="btn-lime !py-2.5 !px-5 !text-sm">
+              Get in touch →
+            </a>
           </div>
 
           <button
@@ -161,13 +161,14 @@ export default function Navbar() {
                   </Link>
                 )
               ))}
-              <Link
-                href="/#contact"
+              <a
+                href={`https://wa.me/${SITE_CONFIG.whatsapp}`}
+                target="_blank" rel="noopener noreferrer"
                 onClick={() => setMobileOpen(false)}
                 className="btn-lime w-full justify-center mt-5"
               >
-                Get Free Consultation →
-              </Link>
+                Get in touch →
+              </a>
             </motion.div>
           </>
         )}
