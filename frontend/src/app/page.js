@@ -1,5 +1,4 @@
 import Hero from "@/components/sections/Hero";
-import TrustedBy from "@/components/sections/TrustedBy";
 import Services from "@/components/sections/Services";
 import WhyChooseUs from "@/components/sections/WhyChooseUs";
 import CaseStudies from "@/components/sections/CaseStudies";
@@ -63,7 +62,6 @@ export default function Home() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
       />
       <Hero />
-        <TrustedBy />
         <Services />
         <WhyChooseUs />
         <CaseStudies />
